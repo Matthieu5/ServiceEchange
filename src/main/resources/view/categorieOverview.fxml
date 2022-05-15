@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+   <children>
+      <HBox prefHeight="66.0" prefWidth="900.0">
+         <children>
+            <Button fx:id="btnPrestation" mnemonicParsing="false" onAction="#redirectionPrestation" text="Prestations" translateX="650.0" translateY="20.0" />
+            <Button fx:id="btnMonProfil" mnemonicParsing="false" onAction="#redirectionParametre" text="Mon profil" translateX="700.0" translateY="20.0" />
+            <Label fx:id="compteurCategorie" prefHeight="22.0" prefWidth="41.0" style="-fx-border-color: black;" text="Label" translateX="410.0" translateY="23.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox prefHeight="500.0" prefWidth="900.0" translateY="100.0">
+         <children>
+            <Button fx:id="jardinage" mnemonicParsing="false" onAction="#redirectionProfils" prefHeight="140.0" prefWidth="199.0" text="Jardinage" translateX="30.0" translateY="30.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="maconnerie" mnemonicParsing="false" onAction="#redirectionProfils" prefHeight="140.0" prefWidth="199.0" text="Maçonnerie" translateX="150.0" translateY="30.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="electricite" mnemonicParsing="false" onAction="#redirectionProfils" prefHeight="140.0" prefWidth="199.0" text="Electricité" translateX="270.0" translateY="30.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Button fx:id="peinture" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#redirectionProfils" prefHeight="140.0" prefWidth="199.0" text="Peinture" translateX="20.0" translateY="350.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="plomberie" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#redirectionProfils" prefHeight="140.0" prefWidth="199.0" text="Plomberie" translateX="329.0" translateY="340.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="autre" layoutX="30.0" layoutY="30.0" mnemonicParsing="false" onAction="#redirectionProfils" prefHeight="140.0" prefWidth="199.0" text="Autre" translateX="638.0" translateY="330.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

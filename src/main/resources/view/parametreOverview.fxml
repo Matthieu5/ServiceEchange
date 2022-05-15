@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+   <children>
+      <HBox prefHeight="84.0" prefWidth="900.0">
+         <children>
+            <Label text="Profil" textAlignment="CENTER" translateX="408.0" translateY="15.0">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox prefHeight="402.0" prefWidth="900.0" translateY="100.0">
+         <children>
+            <TextField fx:id="nomProfil" translateX="150.0" translateY="100.0" />
+            <TextField fx:id="prenomProfil" translateX="250.0" translateY="100.0" />
+            <TextField fx:id="ageProfil" translateX="350.0" translateY="100.0" />
+            <TextField fx:id="telProfil" translateX="-150.0" translateY="200.0" />
+            <TextField fx:id="mailProfil" translateX="-50.0" translateY="200.0" />
+            <TextField fx:id="adresseProfil" translateX="50.0" translateY="200.0" />
+            <Label fx:id="dateInscriptionProfil" prefHeight="27.0" prefWidth="94.0" text="Label" translateX="-520.0" translateY="300.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="noteProfil" prefHeight="27.0" prefWidth="94.0" text="Label" translateX="-410.0" translateY="300.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="actifProfil" translateX="-280.0" translateY="300.0" />
+            <TextField fx:id="desscriptionProfil" translateX="-150.0" translateY="300.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="900.0" translateY="500.0">
+         <children>
+            <Button fx:id="btnModifierProfil" mnemonicParsing="false" onAction="#ModifierProfil" text="Modifier" translateX="650.0" translateY="40.0" />
+            <Button fx:id="btnRetourProfil" mnemonicParsing="false" onAction="#redirectionCategorie" text="Retour" translateX="700.0" translateY="40.0" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
