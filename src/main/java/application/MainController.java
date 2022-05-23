@@ -1,5 +1,6 @@
 package application;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
@@ -60,6 +61,11 @@ public class MainController {
     protected void ModifierProfil() {
 
     }
+
+    @FXML
+    protected void deconnexion() { Main.showConnexionOverview(); }
+
+
 
     public void redirectionCategorie(ActionEvent actionEvent) {
         Main.showCategorieOverview();
