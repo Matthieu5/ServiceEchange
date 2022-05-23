@@ -61,6 +61,10 @@ public class MainController {
 
     }
 
+    protected void redirectionConnexion() {
+        Main.showParametreOverview();
+    }
+
     public void redirectionCategorie(ActionEvent actionEvent) {
         Main.showCategorieOverview();
     }
