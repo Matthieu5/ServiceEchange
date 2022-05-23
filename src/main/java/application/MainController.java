@@ -61,6 +61,12 @@ public class MainController {
 
     }
 
+    @FXML
+    protected void deconnexion() {
+        Main.showConnexionOverview();
+        Main.deconnexionMain("Deconnexion");
+    }
+
     public void redirectionCategorie(ActionEvent actionEvent) {
         Main.showCategorieOverview();
     }

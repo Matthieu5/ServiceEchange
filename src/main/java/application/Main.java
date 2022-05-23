@@ -30,7 +30,7 @@ public class Main extends Application {
         this.stage = stage;
         this.stage.setTitle("Service Exchanges");
 
-        SocketClient socketclient = new SocketClient("192.168.1.23", 25566)
+        SocketClient socketclient = new SocketClient("192.168.50.135", 25566)
                 .addConnectEvent(onConnect -> System.out.println("Connected!"))
                 .addDisconnectEvent(onDisconnect -> System.out.println("Disconnected!"))
                 .addPacketReceivedEvent(((socket, packet) -> {
@@ -174,8 +174,8 @@ public class Main extends Application {
         socketClientGlobal.sendPacket(new InscriptionPacket(typePacket,nom,prenom,tel,mail,adresse,age,mdp,login));
     }
 
-    public static void deconnexionMain(String typePacket, String id) {
-        socketClientGlobal.sendPacket(new DeconnexionPacket(typePacket,id));
+    public static void deconnexionMain(String typePacket) {
+        socketClientGlobal.sendPacket(new DeconnexionPacket(typePacket));
     }
 
     public static void showPrestationOverview() {
