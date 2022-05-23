@@ -5,9 +5,16 @@ import javafx.fxml.FXML;
 public class CategorieController {
 
     @FXML
-    protected void redirectionDeconnexion () {
+    protected  void redirectionDeconnexion () {
+
         Main.deconnexionMain("Deconnexion");
         Main.showConnexionOverview();
+
+    }
+
+
+    protected void redirectionConnexion() {
+        Main.showParametreOverview();
     }
 
     @FXML

@@ -66,12 +66,6 @@ public class Main {
             socket.sendPacket(new DeconnexionPacketReturn("true"));
             System.out.println("Déconnexion " + token.toString());
 
-        } else if(message.getString("typePacket").equals("DemandeProfil")) {
-            SelectProfilSQL sps = new SelectProfilSQL();
-
-            /*if(sps.getSQLProfil()) {
-                socket.sendPacket(new DemandeProfilPacketReturn(infos));
-            }*/
         }
     }
 
@@ -95,14 +89,6 @@ public class Main {
 
         public DeconnexionPacketReturn(String reponse){
             getObject().put("typePacket", "Deconnexion retour");
-
-        }
-    }
-
-    public static class DemandeProfilPacketReturn extends Packet {
-
-        public DemandeProfilPacketReturn(ArrayList reponse){
-            getObject().put("typePacket", "Demande Profil retour");
             getObject().put("message", reponse);
         }
     }
