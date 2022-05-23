@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import packet.DeconnexionPacket;
 import sql.AddUserSQL;
 import sql.ConnectUserSQL;
+import sql.SelectProfilSQL;
 import xyz.baddeveloper.lwsl.client.SocketClient;
 import xyz.baddeveloper.lwsl.packet.Packet;
 import xyz.baddeveloper.lwsl.server.SocketHandler;
@@ -14,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
