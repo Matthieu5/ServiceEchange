@@ -1,6 +1,7 @@
 package server;
 
 import org.json.JSONObject;
+import packet.DeconnexionPacket;
 import sql.AddUserSQL;
 import sql.ConnectUserSQL;
 import xyz.baddeveloper.lwsl.client.SocketClient;
@@ -59,7 +60,7 @@ public class Main {
                 socket.sendPacket(new InscriptionPacketReturn("false"));
             }
         }else if(message.getString("typePacket").equals("Deconnexion")) {
-
+            //socket.sendPacket(new DeconnexionPacket("false"));
         }
     }
 
