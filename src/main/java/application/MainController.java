@@ -41,30 +41,15 @@ public class MainController {
         Main.showCategorieOverview();
     }
 
-    @FXML
-    protected void redirectionProfils() {
-        Main.showProfilsOverview();
-    }
 
-    @FXML
-    protected void redirectionPrestation() {
-        Main.showParametreOverview();
-    }
 
-    @FXML
-    protected void redirectionParametre() {
-        Main.showParametreOverview();
-    }
+
+
+
 
     @FXML
     protected void ModifierProfil() {
 
-    }
-
-    @FXML
-    protected void deconnexion() {
-        Main.showConnexionOverview();
-        Main.deconnexionMain("Deconnexion");
     }
 
     public void redirectionCategorie(ActionEvent actionEvent) {
