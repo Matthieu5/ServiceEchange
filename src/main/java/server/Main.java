@@ -87,7 +87,7 @@ public class Main {
 
         public DeconnexionPacketReturn(String reponse){
             getObject().put("typePacket", "Deconnexion retour");
-
+            getObject().put("message", reponse);
         }
     }
 }

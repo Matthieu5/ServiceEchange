@@ -83,6 +83,7 @@ public class Main extends Application {
                 InscriptionController.retourInscription(false);
             }
         }
+
     }
 
 
