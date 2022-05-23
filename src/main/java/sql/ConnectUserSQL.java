@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 public class ConnectUserSQL {
-    public boolean getSQLServerConnection(String id, String mdp) throws Exception {
-        boolean connection = true;
+    public String getSQLServerConnection(String id, String mdp) throws Exception {
+        String  id_personne = "";
         try {
 
             //étape 1: charger la classe de driver
@@ -24,8 +24,8 @@ public class ConnectUserSQL {
 
             //étape 4: exécuter la requête
             ResultSet res = updateSales.executeQuery();
-            if(!res.next()) {
-                connection=false;
+            if(res.next()) {
+                id_personne = res.getObject(1).toString();
             }
             //étape 5: fermez l'objet de connexion
             con.close();
@@ -33,6 +33,6 @@ public class ConnectUserSQL {
         catch(Exception e) {
             System.out.println(e);
         }
-        return connection;
+        return id_personne;
     }
 }

@@ -3,18 +3,22 @@ package server;
 import org.json.JSONObject;
 import sql.AddUserSQL;
 import sql.ConnectUserSQL;
+import xyz.baddeveloper.lwsl.client.SocketClient;
 import xyz.baddeveloper.lwsl.packet.Packet;
 import xyz.baddeveloper.lwsl.server.SocketHandler;
 import xyz.baddeveloper.lwsl.server.SocketServer;
 
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class Main {
     private static SocketServer socketServer;
+    public static HashMap <String, String> token = new HashMap<String, String>();
 
     public static void main(String[] args) {
 
@@ -36,10 +40,13 @@ public class Main {
 
     public static void lireMessage(SocketHandler socket, JSONObject message) throws Exception {
         System.out.println(message);
+
         if(message.getString("typePacket").equals("Login")) {
             ConnectUserSQL cus = new ConnectUserSQL();
-            if (cus.getSQLServerConnection(message.getString("username"), message.getString("password"))) {
+            if (cus.getSQLServerConnection(message.getString("username"), message.getString("password")) != "") {
                 socket.sendPacket(new LoginPacketReturn("true"));
+                token.put(cus.getSQLServerConnection(message.getString("username"), message.getString("password")), socket.getSocket().getInetAddress().toString().substring(1));
+                System.out.println(token);
             } else {
                 socket.sendPacket(new LoginPacketReturn("false"));
             }
@@ -51,6 +58,8 @@ public class Main {
             } else {
                 socket.sendPacket(new InscriptionPacketReturn("false"));
             }
+        }else if(message.getString("typePacket").equals("Deconnexion")) {
+
         }
     }
 
