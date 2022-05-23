@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Date;
 
+import packet.DeconnexionPacket;
 import packet.InscriptionPacket;
 import packet.LoginPacket;
 import xyz.baddeveloper.lwsl.client.SocketClient;
@@ -171,6 +172,10 @@ public class Main extends Application {
 
     public static void inscriptionMain(String typePacket, String nom, String prenom, String tel, String mail, String adresse, int age, String mdp, String login) {
         socketClientGlobal.sendPacket(new InscriptionPacket(typePacket,nom,prenom,tel,mail,adresse,age,mdp,login));
+    }
+
+    public static void deconnexionMain(String typePacket, String id) {
+        socketClientGlobal.sendPacket(new DeconnexionPacket(typePacket,id));
     }
 
     public static void showPrestationOverview() {
