@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -11,9 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Date;
 
-import packet.DeconnexionPacket;
-import packet.InscriptionPacket;
-import packet.LoginPacket;
+import packet.*;
 import xyz.baddeveloper.lwsl.client.SocketClient;
 import xyz.baddeveloper.lwsl.client.exceptions.ConnectException;
 import xyz.baddeveloper.lwsl.packet.Packet;
@@ -30,7 +29,7 @@ public class Main extends Application {
         this.stage = stage;
         this.stage.setTitle("Service Exchanges");
 
-        SocketClient socketclient = new SocketClient("192.168.50.135", 25566)
+        SocketClient socketclient = new SocketClient("192.168.43.202", 25566)
                 .addConnectEvent(onConnect -> System.out.println("Connected!"))
                 .addDisconnectEvent(onDisconnect -> System.out.println("Disconnected!"))
                 .addPacketReceivedEvent(((socket, packet) -> {
@@ -151,6 +150,7 @@ public class Main extends Application {
     }
 
     public static void showParametreOverview() {
+        demandeProfil("DemandeProfil");
         Platform.runLater(() -> {
             try {
                 // Load connexion overview.
@@ -172,6 +172,14 @@ public class Main extends Application {
 
     public static void inscriptionMain(String typePacket, String nom, String prenom, String tel, String mail, String adresse, int age, String mdp, String login) {
         socketClientGlobal.sendPacket(new InscriptionPacket(typePacket,nom,prenom,tel,mail,adresse,age,mdp,login));
+    }
+
+    public static void demandeProfil(String typePacket) {
+        socketClientGlobal.sendPacket(new DemandeProfil(typePacket));
+    }
+
+    public static void modifierProfil(String typePacket, TextField nom, TextField prenom, TextField age, TextField tel, TextField mail, TextField adresse, TextField actif, TextField description) {
+        socketClientGlobal.sendPacket(new ProfilPacket(typePacket,nom,prenom,age,tel, mail,adresse,actif,description));
     }
 
     public static void deconnexionMain(String typePacket) {
