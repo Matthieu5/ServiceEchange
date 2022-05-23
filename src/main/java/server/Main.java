@@ -1,6 +1,7 @@
 package server;
 
 import org.json.JSONObject;
+import packet.DeconnexionPacket;
 import sql.AddUserSQL;
 import sql.ConnectUserSQL;
 import xyz.baddeveloper.lwsl.client.SocketClient;
@@ -45,7 +46,7 @@ public class Main {
             ConnectUserSQL cus = new ConnectUserSQL();
             if (cus.getSQLServerConnection(message.getString("username"), message.getString("password")) != "") {
                 socket.sendPacket(new LoginPacketReturn("true"));
-                token.put(cus.getSQLServerConnection(message.getString("username"), message.getString("password")), socket.getSocket().getInetAddress().toString().substring(1));
+                token.put(socket.getSocket().getInetAddress().toString().substring(1),cus.getSQLServerConnection(message.getString("username"), message.getString("password")));
                 System.out.println(token);
             } else {
                 socket.sendPacket(new LoginPacketReturn("false"));
@@ -59,6 +60,9 @@ public class Main {
                 socket.sendPacket(new InscriptionPacketReturn("false"));
             }
         }else if(message.getString("typePacket").equals("Deconnexion")) {
+            token.remove(socket.getSocket().getInetAddress().toString().substring(1));
+            socket.sendPacket(new DeconnexionPacketReturn("true"));
+            System.out.println("Déconnexion " + token.toString());
 
         }
     }
@@ -76,6 +80,14 @@ public class Main {
         public LoginPacketReturn(String reponse){
             getObject().put("typePacket", "Login retour");
             getObject().put("message", reponse);
+        }
+    }
+
+    public static class DeconnexionPacketReturn extends Packet {
+
+        public DeconnexionPacketReturn(String reponse){
+            getObject().put("typePacket", "Deconnexion retour");
+
         }
     }
 }
