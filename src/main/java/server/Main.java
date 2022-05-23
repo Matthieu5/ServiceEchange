@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import packet.DeconnexionPacket;
 import sql.AddUserSQL;
 import sql.ConnectUserSQL;
+import sql.SelectProfilSQL;
 import xyz.baddeveloper.lwsl.client.SocketClient;
 import xyz.baddeveloper.lwsl.packet.Packet;
 import xyz.baddeveloper.lwsl.server.SocketHandler;
@@ -14,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -64,6 +66,12 @@ public class Main {
             socket.sendPacket(new DeconnexionPacketReturn("true"));
             System.out.println("Déconnexion " + token.toString());
 
+        } else if(message.getString("typePacket").equals("DemandeProfil")) {
+            SelectProfilSQL sps = new SelectProfilSQL();
+
+            /*if(sps.getSQLProfil()) {
+                socket.sendPacket(new DemandeProfilPacketReturn(infos));
+            }*/
         }
     }
 
@@ -88,6 +96,14 @@ public class Main {
         public DeconnexionPacketReturn(String reponse){
             getObject().put("typePacket", "Deconnexion retour");
 
+        }
+    }
+
+    public static class DemandeProfilPacketReturn extends Packet {
+
+        public DemandeProfilPacketReturn(ArrayList reponse){
+            getObject().put("typePacket", "Demande Profil retour");
+            getObject().put("message", reponse);
         }
     }
 }
