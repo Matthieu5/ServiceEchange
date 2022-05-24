@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class AddUserSQL {
     public boolean add(String nom, String prenom, String tel, String mail,
-                    String adresse, Integer age, String mdp, String login ) throws Exception {
+                       String adresse, Integer age, String mdp, String login ) throws Exception {
 
         try {
 

@@ -41,12 +41,6 @@ public class MainController {
         Main.showCategorieOverview();
     }
 
-
-
-
-
-
-
     @FXML
     protected void ModifierProfil() {
 
