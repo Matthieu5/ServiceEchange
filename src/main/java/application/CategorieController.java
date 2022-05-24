@@ -2,10 +2,14 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class CategorieController {
+
+public class CategorieController  {
 
     @FXML
     private Button jardinage;
@@ -20,7 +24,7 @@ public class CategorieController {
     @FXML
     private Button autre;
 
-
+    public static String profilName;
 
 
     @FXML
@@ -43,11 +47,20 @@ public class CategorieController {
 
     @FXML
     protected void redirectionProfils(ActionEvent actionEvent) {
-        Main.showProfilsOverview(((Button)actionEvent.getSource()).getText());
+        setProfilName(((Button)actionEvent.getSource()).getText());
+        Main.showProfilsOverview();
     }
 
     @FXML
     protected void redirectionParametre() {
         Main.showParametreOverview();
+    }
+
+    public String getProfilName() {
+        return this.profilName;
+    }
+
+    public void setProfilName (String s) {
+        this.profilName=s;
     }
 }

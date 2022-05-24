@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -160,14 +161,14 @@ public class Main extends Application {
         });
     }
 
-    public static void showProfilsOverview(String text) {
+    public static void showProfilsOverview() {
         Platform.runLater(() -> {
             try {
                 // Load connexion overview.
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(Main.class.getResource("/view/profilsOverview.fxml"));
                 AnchorPane profilsOverview = (AnchorPane) loader.load();
-
+                
                 // Set connexion overview into the center of root layout.
                 rootLayout.setCenter(profilsOverview);
             } catch (IOException e) {
