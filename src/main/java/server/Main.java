@@ -1,22 +1,15 @@
 package server;
 
 import org.json.JSONObject;
-import packet.DeconnexionPacket;
 import sql.AddUserSQL;
 import sql.ConnectUserSQL;
 import sql.SelectProfilSQL;
-import xyz.baddeveloper.lwsl.client.SocketClient;
+import sql.UpdateProfilSQL;
 import xyz.baddeveloper.lwsl.packet.Packet;
 import xyz.baddeveloper.lwsl.server.SocketHandler;
 import xyz.baddeveloper.lwsl.server.SocketServer;
 
-import java.net.Socket;
-import java.nio.charset.StandardCharsets;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
 public class Main {
@@ -66,6 +59,38 @@ public class Main {
             socket.sendPacket(new DeconnexionPacketReturn("true"));
             System.out.println("Déconnexion " + token.toString());
 
+        } else if(message.getString("typePacket").equals("DemandeProfil")) {
+            SelectProfilSQL sps = new SelectProfilSQL();
+
+
+            System.out.println(token.get(socket.getSocket().getInetAddress().toString().substring(1)));
+            ArrayList infos = sps.getSQLProfil(token.get(socket.getSocket().getInetAddress().toString().substring(1)));
+            if(infos.isEmpty()) {
+                System.out.println("Aucun profil trouvé");
+            } else {
+                String nom = String.valueOf(infos.get(0));
+                String prenom = String.valueOf(infos.get(1));
+                String tel = String.valueOf(infos.get(2));
+                String mail = String.valueOf(infos.get(3));
+                String adresse = String.valueOf(infos.get(4));
+                String age = String.valueOf(infos.get(5));
+                String dateInscription = String.valueOf(infos.get(6));
+                String moyenne = String.valueOf(infos.get(7));
+                String description = String.valueOf(infos.get(8));
+                String compteur = String.valueOf(infos.get(9));
+                String actif = String.valueOf(infos.get(10));
+
+                socket.sendPacket(new DemandeProfilPacketReturn(nom, prenom, tel, mail, adresse, age, dateInscription, moyenne, description, compteur, actif));
+            }
+        } else if(message.getString("typePacket").equals("ModifierProfil")) {
+            UpdateProfilSQL ups = new UpdateProfilSQL();
+            System.out.println(token.get(socket.getSocket().getInetAddress().toString().substring(1)));
+            Boolean retour = ups.updateProfilSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("telephone"), message.getString("age"), message.getString("email"), message.getString("adresse"), message.getString("description"), message.getString("actif"));
+            if(retour.equals(true)) {
+                socket.sendPacket(new UpdateProfilPacketReturn("true"));
+            } else {
+                System.out.println("Erreur de modification du profil");
+            }
         }
     }
 
@@ -85,11 +110,37 @@ public class Main {
         }
     }
 
+    public static class UpdateProfilPacketReturn extends Packet {
+
+        public UpdateProfilPacketReturn(String reponse){
+            getObject().put("typePacket", "Update Profil retour");
+            getObject().put("message", reponse);
+        }
+    }
+
     public static class DeconnexionPacketReturn extends Packet {
 
         public DeconnexionPacketReturn(String reponse){
             getObject().put("typePacket", "Deconnexion retour");
-            getObject().put("message", reponse);
+
+        }
+    }
+
+    public static class DemandeProfilPacketReturn extends Packet {
+
+        public DemandeProfilPacketReturn(String nom, String prenom, String tel, String mail, String adresse, String age, String dateInscription, String moyenne, String description, String compteur, String actif){
+            getObject().put("typePacket", "Demande Profil retour");
+            getObject().put("nom", nom);
+            getObject().put("prenom", prenom);
+            getObject().put("tel", tel);
+            getObject().put("mail", mail);
+            getObject().put("adresse", adresse);
+            getObject().put("age", age);
+            getObject().put("dateInscription", dateInscription);
+            getObject().put("moyenne", moyenne);
+            getObject().put("description", description);
+            getObject().put("compteur", compteur);
+            getObject().put("actif", actif);
         }
     }
 }

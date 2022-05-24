@@ -21,32 +21,30 @@ public class SelectProfilSQL {
             //étape 3: créer l'objet statement
             String query = "SELECT nom_personne, prenom_personne, tel_personne, mail_personne, adresse_personne, age_personne FROM personne where id_personne=?";
             PreparedStatement updateSales = con.prepareStatement(query);
-            updateSales.setString(1, id);
-
+            updateSales.setInt(1, Integer.parseInt(id));
             //étape 4: exécuter la requête
             ResultSet res = updateSales.executeQuery();
             if(res.next()) {
-                infos.add("");
-                infos.add("");
-                infos.add("");
-                infos.add("");
-                infos.add("");
-                infos.add("");
+                infos.add(res.getObject(1).toString());
+                infos.add(res.getObject(2).toString());
+                infos.add(res.getObject(3).toString());
+                infos.add(res.getObject(4).toString());
+                infos.add(res.getObject(5).toString());
+                infos.add(res.getObject(6).toString());
             }
-
             //étape 3: créer l'objet statement
             String query2 = "SELECT date_inscription, moyenne_utilisateur, description_utilisateur, compteur_utilisateur, actif FROM utilisateur where id_personne=?";
             PreparedStatement updateSales2 = con.prepareStatement(query2);
-            updateSales2.setString(1, id);
+            updateSales2.setInt(1, Integer.parseInt(id));
 
             //étape 4: exécuter la requête
-            ResultSet res2 = updateSales.executeQuery();
-            if(res.next()) {
-                infos.add("");
-                infos.add("");
-                infos.add("");
-                infos.add("");
-                infos.add("");
+            ResultSet res2 = updateSales2.executeQuery();
+            if(res2.next()) {
+                infos.add(res2.getObject(1).toString());
+                infos.add(res2.getObject(2).toString());
+                infos.add(res2.getObject(3).toString());
+                infos.add(res2.getObject(4).toString());
+                infos.add(res2.getObject(5).toString());
             }
 
             //étape 5: fermez l'objet de connexion
