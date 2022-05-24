@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfilController">
    <children>
       <HBox prefHeight="84.0" prefWidth="900.0">
          <children>
@@ -20,30 +20,31 @@
       </HBox>
       <HBox prefHeight="402.0" prefWidth="900.0" translateY="100.0">
          <children>
-            <TextField fx:id="nomProfil" translateX="150.0" translateY="100.0" />
-            <TextField fx:id="prenomProfil" translateX="250.0" translateY="100.0" />
-            <TextField fx:id="ageProfil" translateX="350.0" translateY="100.0" />
-            <TextField fx:id="telProfil" translateX="-150.0" translateY="200.0" />
-            <TextField fx:id="mailProfil" translateX="-50.0" translateY="200.0" />
-            <TextField fx:id="adresseProfil" translateX="50.0" translateY="200.0" />
-            <Label fx:id="dateInscriptionProfil" prefHeight="27.0" prefWidth="94.0" text="Label" translateX="-520.0" translateY="300.0">
+            <TextField fx:id="nomProfil" translateX="200.0" translateY="100.0" />
+            <TextField fx:id="prenomProfil" translateX="350.0" translateY="100.0" />
+            <TextField fx:id="ageProfil" translateX="500.0" translateY="100.0" />
+            <TextField fx:id="telProfil" translateY="200.0" />
+            <TextField fx:id="mailProfil" translateX="150.0" translateY="200.0" />
+            <TextField fx:id="adresseProfil" translateX="300.0" translateY="200.0" />
+            <Label fx:id="dateInscriptionProfil" prefHeight="27.0" prefWidth="194.0" text="Label" translateX="-400.0" translateY="300.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="noteProfil" prefHeight="27.0" prefWidth="94.0" text="Label" translateX="-410.0" translateY="300.0">
+            <Label fx:id="noteProfil" prefHeight="27.0" prefWidth="169.0" text="Label" translateX="-300.0" translateY="300.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="actifProfil" translateX="-280.0" translateY="300.0" />
-            <TextField fx:id="desscriptionProfil" translateX="-150.0" translateY="300.0" />
+            <TextField fx:id="actifProfil" translateX="-200.0" translateY="300.0" />
+            <TextField fx:id="desscriptionProfil" prefHeight="26.0" prefWidth="316.0" translateX="-50.0" translateY="300.0" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="900.0" translateY="500.0">
          <children>
             <Button fx:id="btnModifierProfil" mnemonicParsing="false" onAction="#ModifierProfil" text="Modifier" translateX="650.0" translateY="40.0" />
             <Button fx:id="btnRetourProfil" mnemonicParsing="false" onAction="#redirectionCategorie" text="Retour" translateX="700.0" translateY="40.0" />
+            <Button fx:id="btnRafraichir" mnemonicParsing="false" onAction="#entrerDonnees" text="Rafraîchir" translateX="415.0" translateY="40.0" />
          </children>
       </HBox>
    </children>

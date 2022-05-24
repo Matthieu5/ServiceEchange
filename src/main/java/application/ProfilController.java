@@ -9,9 +9,13 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static application.Profil.*;
+
 public class ProfilController implements Initializable {
     @FXML
     private Label dateInscriptionProfil;
+    @FXML
+    private Label noteProfil;
     @FXML
     private TextField nomProfil;
     @FXML
@@ -31,7 +35,7 @@ public class ProfilController implements Initializable {
 
     @FXML
     protected void ModifierProfil() {
-        Main.modifierProfil("ModifierProfil", nomProfil, prenomProfil, ageProfil, telProfil, mailProfil, adresseProfil, actifProfil, descriptionProfil);
+        Main.modifierProfil("ModifierProfil", nomProfil.getText(), prenomProfil.getText(), telProfil.getText(), ageProfil.getText(), mailProfil.getText(), adresseProfil.getText(), "test", actifProfil.getText());
     }
 
     public void redirectionCategorie(ActionEvent actionEvent) {
@@ -40,7 +44,23 @@ public class ProfilController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        dateInscriptionProfil.setText("test");
-        nomProfil.setText("test");
+    }
+
+    public void entrerDonnees() {
+        nomProfil.setText(getNom());
+        prenomProfil.setText(getPrenom());
+        telProfil.setText(getTel());
+        mailProfil.setText(getMail());
+        adresseProfil.setText(getAdresse());
+        ageProfil.setText(getAge());
+        dateInscriptionProfil.setText(getDateInscription());
+        noteProfil.setText(getNote());
+        actifProfil.setText(getActif());
+        if(getActif().equals(true)) {
+            actifProfil.setText("Actif");
+        } else {
+            actifProfil.setText("Pas actif");
+        }
+        //descriptionProfil.setText(getDescription());
     }
 }
