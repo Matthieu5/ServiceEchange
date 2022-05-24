@@ -21,7 +21,7 @@ public class AddUserSQL {
             //étape 3: créer l'objet statement
             String query =
                     "INSERT INTO personne(nom_personne, prenom_personne, tel_personne, mail_personne, adresse_personne, age_personne, mdp_personne, login_personne) VALUES (?,?,?,?,?,?,?,?);"+
-                    "INSERT INTO utilisateur(date_inscription) VALUES (NOW());";
+                    "INSERT INTO utilisateur(id_personne,date_inscription) VALUES (  (SELECT id_personne FROM personne WHERE login_personne=?) ,  NOW());";
 
             PreparedStatement updateSales = con.prepareStatement(query);
             updateSales.setString(1, nom);
@@ -32,6 +32,7 @@ public class AddUserSQL {
             updateSales.setInt(6, age);
             updateSales.setString(7, mdp);
             updateSales.setString(8, login);
+            updateSales.setString(9, login);
 
 
 
