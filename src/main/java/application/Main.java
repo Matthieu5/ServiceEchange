@@ -160,7 +160,7 @@ public class Main extends Application {
         });
     }
 
-    public static void showProfilsOverview() {
+    public static void showProfilsOverview(String text) {
         Platform.runLater(() -> {
             try {
                 // Load connexion overview.
