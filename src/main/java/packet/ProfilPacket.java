@@ -1,10 +1,9 @@
 package packet;
 
-import javafx.scene.control.TextField;
 import xyz.baddeveloper.lwsl.packet.Packet;
 
 public class ProfilPacket extends Packet {
-    public ProfilPacket(String typePacket, TextField nom, TextField prenom, TextField age, TextField telephone, TextField email, TextField adresse, TextField actif, TextField description){
+    public ProfilPacket(String typePacket, String nom, String prenom, String age, String telephone, String email, String adresse, String actif, String description){
         getObject().put("typePacket", typePacket);
         getObject().put("nom", nom);
         getObject().put("prenom", prenom);
