@@ -142,12 +142,13 @@ public class Main extends Application {
 
     public static void showProfilsOverview(String buttonName) {
 
-
+        System.out.println(buttonName);
 
         Platform.runLater(() -> {
             try {
                 // Load connexion overview.
                 FXMLLoader loader = new FXMLLoader();
+
                 loader.setLocation(Main.class.getResource("/view/profilsOverview.fxml"));
                 AnchorPane profilsOverview = (AnchorPane) loader.load();
 
