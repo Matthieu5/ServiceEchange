@@ -140,7 +140,10 @@ public class Main extends Application {
         });
     }
 
-    public static void showProfilsOverview() {
+    public static void showProfilsOverview(String buttonName) {
+
+
+
         Platform.runLater(() -> {
             try {
                 // Load connexion overview.
@@ -157,7 +160,7 @@ public class Main extends Application {
     }
 
     public static void showParametreOverview() {
-        demandeProfil("DemandeProfil");
+
         Platform.runLater(() -> {
             try {
                 // Load connexion overview.
