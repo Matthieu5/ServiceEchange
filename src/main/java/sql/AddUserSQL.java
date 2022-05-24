@@ -2,6 +2,8 @@ package sql;
 
 import java.sql.*;
 
+
+
 public class AddUserSQL {
     public boolean add(String nom, String prenom, String tel, String mail,
                     String adresse, int age, String mdp, String login ) throws Exception {
@@ -15,9 +17,10 @@ public class AddUserSQL {
             Connection con = DriverManager.getConnection(
                     "jdbc:postgresql://localhost:5432/bd_projetService","postgres","admin");
             System.out.print(nom+" "+ prenom+" "+tel+" "+mail+" "+adresse+" "+age+" "+mdp+" "+login);
+
             //étape 3: créer l'objet statement
             String query =
-                    "INSERT INTO personne(nom_personne, prenom_personne, tel_personne, mail_personne, adresse_personne, age_personne, mdp_personne, login_personne) VALUES (?,?,?,?,?,?,?,?);"+
+                    "INSERT INTO personne(crypt(nom_personne, prenom_personne, tel_personne, mail_personne, adresse_personne, age_personne, mdp_personne, login_personne) VALUES (?,?,?,?,?,?,?,?);"+
                     "INSERT INTO utilisateur(date_inscription) VALUES (NOW());";
 
             PreparedStatement updateSales = con.prepareStatement(query);
