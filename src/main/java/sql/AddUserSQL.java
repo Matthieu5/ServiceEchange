@@ -16,10 +16,10 @@ public class AddUserSQL {
                     "jdbc:postgresql://localhost:5432/bd_projetService","postgres","admin");
             System.out.print(nom+" "+ prenom+" "+tel+" "+mail+" "+adresse+" "+age+" "+mdp+" "+login);
             //étape 3: créer l'objet statement
-            String query = "BEGIN TRANSACTION" +
-                    "   INSERT INTO personne(nom_personne, prenom_personne, tel_personne, mail_personne, adresse_personne, age_personne, mdp_personne, login_personne) VALUES (?,?,?,?,?,?,?,?);" +
-                    "   INSERT INTO utlisateur(date_inscription) VALUES (NOW());" +
-                    "COMMIT";
+            String query =
+                    "   INSERT INTO personne(nom_personne, prenom_personne, tel_personne, mail_personne, adresse_personne, age_personne, mdp_personne, login_personne) VALUES (?,?,?,?,?,?,?,?);"+
+                    "   INSERT INTO utlisateur(date_inscription) VALUES (NOW());";
+
             PreparedStatement updateSales = con.prepareStatement(query);
             updateSales.setString(1, nom);
             updateSales.setString(2, prenom);
