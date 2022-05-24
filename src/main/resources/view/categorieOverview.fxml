@@ -15,7 +15,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="deconnexion" mnemonicParsing="false" onAction="#deconnexion" text="Déconnexion" translateX="550.0" translateY="20.0" />
+            <Button fx:id="deconnexion" mnemonicParsing="false" onAction="#redirectionDeconnexion" text="Déconnexion" translateX="550.0" translateY="20.0" />
             <Button fx:id="btnPrestation" mnemonicParsing="false" onAction="#redirectionPrestation" text="Prestations" translateX="575.0" translateY="20.0" />
             <Button fx:id="btnMonProfil" mnemonicParsing="false" onAction="#redirectionParametre" text="Mon profil" translateX="600.0" translateY="20.0" />
          </children>
