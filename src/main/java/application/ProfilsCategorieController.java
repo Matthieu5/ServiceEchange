@@ -32,4 +32,7 @@ public class ProfilsCategorieController implements Initializable {
         return cg.getProfilName();
     }
 
+    @FXML
+    private void redirectionMessage() {Main.showMessageOverview();}
+
 }
