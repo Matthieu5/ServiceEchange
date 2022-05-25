@@ -10,19 +10,18 @@ import java.util.ResourceBundle;
 
 public class ProfilsCategorieController implements Initializable {
 
-    @FXML
-    private Label TitreCategorie;
-
-    @FXML
-    protected void redirectionCategorie() {Main.showCategorieOverview();}
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         TitreCategorie.setText(getTitreCategorie());
     }
 
-    public String getTitreCategorie() {
+    @FXML
+    private Label TitreCategorie;
+
+    @FXML
+    private void redirectionCategorie() {Main.showCategorieOverview();}
+
+    private String getTitreCategorie() {
         CategorieController cg = new CategorieController();
         return cg.getProfilName();
     }

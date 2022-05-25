@@ -193,6 +193,10 @@ public class Main extends Application {
         socketClientGlobal.sendPacket(new DemandeProfil(typePacket));
     }
 
+    public static void afficherProfilCategorie(String typePacket) {
+        socketClientGlobal.sendPacket(new DemandeProfil(typePacket));
+    }
+
     public static void modifierProfil(String typePacket, String nom, String prenom, String tel, String age, String mail, String adresse, String description, String actif) {
         socketClientGlobal.sendPacket(new ModifProfilPacket(typePacket,nom,prenom,tel,age,mail,adresse,description,actif));
     }
