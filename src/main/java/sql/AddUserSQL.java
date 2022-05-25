@@ -2,9 +2,11 @@ package sql;
 
 import java.sql.*;
 
+
+
 public class AddUserSQL {
     public boolean add(String nom, String prenom, String tel, String mail,
-                       String adresse, Integer age, String mdp, String login ) throws Exception {
+                    String adresse, int age, String mdp, String login ) throws Exception {
 
         try {
 
@@ -15,10 +17,11 @@ public class AddUserSQL {
             Connection con = DriverManager.getConnection(
                     "jdbc:postgresql://localhost:5432/bd_projetService","postgres","admin");
             System.out.print(nom+" "+ prenom+" "+tel+" "+mail+" "+adresse+" "+age+" "+mdp+" "+login);
+
             //étape 3: créer l'objet statement
             String query =
-                    "   INSERT INTO personne(nom_personne, prenom_personne, tel_personne, mail_personne, adresse_personne, age_personne, mdp_personne, login_personne) VALUES (?,?,?,?,?,?,?,?);"+
-                    "   INSERT INTO utlisateur(date_inscription) VALUES (NOW());";
+                    "INSERT INTO personne(nom_personne, prenom_personne, tel_personne, mail_personne, adresse_personne, age_personne, mdp_personne, login_personne) VALUES (?,?,?,?,?,?,?,?);"+
+                    "INSERT INTO utilisateur(id_personne,date_inscription) VALUES (  (SELECT id_personne FROM personne WHERE login_personne=?) ,  NOW());";
 
             PreparedStatement updateSales = con.prepareStatement(query);
             updateSales.setString(1, nom);
@@ -29,10 +32,12 @@ public class AddUserSQL {
             updateSales.setInt(6, age);
             updateSales.setString(7, mdp);
             updateSales.setString(8, login);
+            updateSales.setString(9, login);
+
 
 
             //étape 4: exécuter la requête
-            ResultSet res = updateSales.executeQuery();
+            updateSales.executeUpdate();
 
             //étape 5: fermez l'objet de connexion
             con.close();

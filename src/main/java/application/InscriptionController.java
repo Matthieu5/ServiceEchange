@@ -31,18 +31,11 @@ public class InscriptionController {
     // bouton valider inscription
     @FXML
     protected void valider() throws NumberFormatException {
-
-
             try {
-
                 Main.inscriptionMain("Inscription", nom.getText(), prenom.getText(), telephone.getText(), email.getText(), adresse.getText(), Integer.parseInt(age.getText()), mdp.getText(), identifiant.getText());
-
             }catch (NumberFormatException e) {
                 e.printStackTrace();
             }
-
-
-
     }
 
     @FXML

@@ -11,7 +11,7 @@ public class SelectProfilSQL {
         ArrayList infos = new ArrayList<>();
         String categorie = null;
         try {
-
+            System.out.println(id);
             //étape 1: charger la classe de driver
             Class.forName("org.postgresql.Driver");
 

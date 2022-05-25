@@ -1,10 +1,7 @@
 package server;
 
 import org.json.JSONObject;
-import sql.AddUserSQL;
-import sql.ConnectUserSQL;
-import sql.SelectProfilSQL;
-import sql.UpdateProfilSQL;
+import sql.*;
 import xyz.baddeveloper.lwsl.packet.Packet;
 import xyz.baddeveloper.lwsl.server.SocketHandler;
 import xyz.baddeveloper.lwsl.server.SocketServer;
@@ -91,6 +88,16 @@ public class Main {
                 socket.sendPacket(new UpdateProfilPacketReturn("true"));
             } else {
                 System.out.println("Erreur de modification du profil");
+            }
+        }else if(message.getString("typePacket").equals("obtenirCategorie")) {
+            ObtenirProfil op = new ObtenirProfil();
+            HashMap infos = op.getAllProfilsCategorie(message.getString("categorie"));
+            System.out.println("reonrejgeoire");
+            if(infos.isEmpty()) {
+                System.out.println("Aucun profil trouvé");
+            } else {
+                /*socket.sendPacket(new DemandeProfilPacketReturn(nom, prenom, tel, mail, adresse, age, dateInscription, moyenne, description, compteur, actif));
+                socket.sendPacket(new UpdateProfilPacketReturn("true"));*/
             }
         }
     }
