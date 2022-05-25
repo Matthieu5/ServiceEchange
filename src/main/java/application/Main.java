@@ -109,6 +109,9 @@ public class Main extends Application {
             });
         } else if(message.getString("typePacket").equals("Update Profil retour")) {
             System.out.println(message.getString("message"));
+
+        } else if(message.getString("typePacket").equals("Profil Categorie retour")) {
+
         }
     }
 
