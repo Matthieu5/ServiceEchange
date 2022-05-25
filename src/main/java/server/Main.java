@@ -92,13 +92,21 @@ public class Main {
         }else if(message.getString("typePacket").equals("obtenirCategorie")) {
             ObtenirProfil op = new ObtenirProfil();
             HashMap infos = op.getAllProfilsCategorie(message.getString("categorie"));
-            System.out.println(infos);
+
             if(infos.isEmpty()) {
                 System.out.println("Aucun profil trouvé");
             } else {
-                /*socket.sendPacket(new DemandeProfilPacketReturn(nom, prenom, tel, mail, adresse, age, dateInscription, moyenne, description, compteur, actif));
-                socket.sendPacket(new UpdateProfilPacketReturn("true"));*/
+                socket.sendPacket(new AfficherProfilCategoriePacketReturn(infos));
+
             }
+        }
+    }
+
+    public static class AfficherProfilCategoriePacketReturn extends Packet {
+
+        public AfficherProfilCategoriePacketReturn(HashMap tableauInfos){
+            getObject().put("typePacket", "Profil Categorie retour");
+            getObject().put("tableauInfos", tableauInfos);
         }
     }
 
