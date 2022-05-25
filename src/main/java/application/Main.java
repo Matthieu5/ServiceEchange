@@ -208,6 +208,10 @@ public class Main extends Application {
         socketClientGlobal.sendPacket(new DeconnexionPacket(typePacket));
     }
 
+    public static void afficherProfilCategorie(String typePacket,String categorie) {
+        socketClientGlobal.sendPacket(new AfficherProfilCategoriePacket(typePacket,categorie));
+    }
+
     public static void showPrestationOverview() {
         Platform.runLater(() -> {
             try {
