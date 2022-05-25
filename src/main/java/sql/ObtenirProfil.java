@@ -9,8 +9,9 @@ import java.util.HashMap;
 
 public class ObtenirProfil {
     public HashMap getAllProfilsCategorie(String categorie) throws Exception {
-        HashMap infos = new HashMap<Integer,ArrayList >();
+        HashMap profilsConcernes = new HashMap<Integer,ArrayList >();
         ArrayList arrayInfo= new ArrayList<>();
+
 
 
         try {
@@ -26,7 +27,7 @@ public class ObtenirProfil {
             String query = "SELECT nom_personne,prenom_personne,u.description_utilisateur FROM personne p " +
                     "join utilisateur u on p.id_personne=u.id_personne "+
                     "join categorie c on u.id_categorie=c.id_categorie "+
-                    "where c.nom_categorie =?";
+                    "where c.nom_categorie = ?";
             PreparedStatement updateSales = con.prepareStatement(query);
             updateSales.setString(1, categorie);
             //étape 4: exécuter la requête
@@ -34,14 +35,17 @@ public class ObtenirProfil {
 
             int compteur = 1;
 
-            if(res.next()) {
-                arrayInfo.add(res.getObject(1).toString());
-                arrayInfo.add(res.getObject(2).toString());
-                arrayInfo.add(res.getObject(3).toString());
+            while(res.next()) {
 
-                infos.put(compteur,arrayInfo);
+                arrayInfo.add(0,res.getString(1));
+                arrayInfo.add(1,res.getString(2));
+                arrayInfo.add(2,res.getString(3));
+
+                profilsConcernes.put(compteur,arrayInfo.clone());
 
                 arrayInfo.clear();
+
+
                 compteur++;
             }
             //étape 5: fermez l'objet de connexion
@@ -50,6 +54,7 @@ public class ObtenirProfil {
         catch(Exception e) {
             System.out.println(e);
         }
-        return infos;
+
+        return profilsConcernes;
     }
 }
