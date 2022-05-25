@@ -29,7 +29,7 @@
          <children>
             <TableView fx:id="ProfilListe" prefHeight="500.0" prefWidth="344.0">
               <columns>
-                <TableColumn fx:id="nomColumn" editable="false" resizable="false" text="Nom" />
+                  <TableColumn fx:id="nomColumn" editable="false" resizable="false" text="Nom" />
                   <TableColumn fx:id="prenomColumn" editable="false" resizable="false" text="Prénom" />
                   <TableColumn fx:id="descriptionColumn" editable="false" prefWidth="180.80001831054688" resizable="false" text="Description" />
               </columns>

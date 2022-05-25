@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import packet.*;
 import xyz.baddeveloper.lwsl.client.SocketClient;
