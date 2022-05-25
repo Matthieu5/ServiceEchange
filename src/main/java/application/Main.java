@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import packet.*;
 import xyz.baddeveloper.lwsl.client.SocketClient;
@@ -182,10 +183,6 @@ public class Main extends Application {
 
     public static void showParametreOverview() {
         demandeProfil("DemandeProfil");
-    }
-
-    public static void afficherProfilCategorie(String typePacket,String categorie) {
-        socketClientGlobal.sendPacket(new AfficherProfilCategoriePacket(typePacket,categorie));
     }
 
     public static void connexionMain(String typePacket, String id, String mdp) {
