@@ -10,7 +10,7 @@ public class SelectProfilSQL {
     public ArrayList getSQLProfil(String id) throws Exception {
         ArrayList infos = new ArrayList<>();
         try {
-
+            System.out.println(id);
             //étape 1: charger la classe de driver
             Class.forName("org.postgresql.Driver");
 
