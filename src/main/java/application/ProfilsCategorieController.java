@@ -13,6 +13,10 @@ public class ProfilsCategorieController implements Initializable {
     @FXML
     private Label TitreCategorie;
 
+    @FXML
+    protected void redirectionCategorie() {Main.showCategorieOverview();}
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         TitreCategorie.setText(getTitreCategorie());
