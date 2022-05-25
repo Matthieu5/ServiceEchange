@@ -13,6 +13,12 @@ public class ProfilsCategorieController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         TitreCategorie.setText(getTitreCategorie());
+
+        try {
+            Main.afficherProfilCategorie("obtenirCategorie",getTitreCategorie() );
+        }catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
