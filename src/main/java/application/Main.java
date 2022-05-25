@@ -88,10 +88,11 @@ public class Main extends Application {
             String dateInscription = message.getString("dateInscription");
             String moyenne = message.getString("moyenne");
             String description = message.getString("description");
+            String categorie = message.getString("categorie");
             String compteur = message.getString("compteur");
             String actif = message.getString("actif");
 
-            Profil p = new Profil(nom, prenom, age, tel, mail, adresse, actif, description, dateInscription, moyenne, compteur);
+            Profil p = new Profil(nom, prenom, age, tel, mail, adresse, actif, categorie, dateInscription, moyenne, compteur, description);
 
             Platform.runLater(() -> {
                 try {
@@ -192,8 +193,8 @@ public class Main extends Application {
         socketClientGlobal.sendPacket(new DemandeProfil(typePacket));
     }
 
-    public static void modifierProfil(String typePacket, String nom, String prenom, String tel, String age, String mail, String adresse, String description, String actif) {
-        socketClientGlobal.sendPacket(new ModifProfilPacket(typePacket,nom,prenom,tel,age,mail,adresse,description,actif));
+    public static void modifierProfil(String typePacket, String nom, String prenom, String tel, String age, String mail, String adresse, String categorie, String actif, String description) {
+        socketClientGlobal.sendPacket(new ModifProfilPacket(typePacket,nom,prenom,tel,age,mail,adresse,categorie,actif,description));
     }
 
     public static void deconnexionMain(String typePacket) {

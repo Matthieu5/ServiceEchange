@@ -7,13 +7,14 @@ public class Profil {
     protected static String age;
     protected static String mail;
     protected static String adresse;
-    protected static String description;
+    protected static String categorie;
     protected static String actif;
     protected static String dateInscription;
     protected static String note;
     protected static String compteur;
+    protected static String description;
 
-    public Profil(String nom, String prenom, String age, String tel, String mail, String adresse, String actif, String description, String dateInscription, String note, String compteur) {
+    public Profil(String nom, String prenom, String age, String tel, String mail, String adresse, String actif, String categorie, String dateInscription, String note, String compteur, String description) {
         this.dateInscription = dateInscription;
         this.note = note;
         this.nom = nom;
@@ -23,8 +24,17 @@ public class Profil {
         this.mail = mail;
         this.adresse = adresse;
         this.actif = actif;
-        this.description = description;
+        this.categorie = categorie;
         this.compteur = compteur;
+        this.description = description;
+    }
+
+    public static String getDescription() {
+        return description;
+    }
+
+    public static void setDescription(String description) {
+        Profil.description = description;
     }
 
     public void setNom(String nom) {
@@ -51,8 +61,8 @@ public class Profil {
         this.adresse = adresse;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
     }
 
     public void setActif(String actif) {
@@ -111,8 +121,8 @@ public class Profil {
         return actif;
     }
 
-    public static String getDescription() {
-        return description;
+    public static String getCategorie() {
+        return categorie;
     }
 
     @Override
@@ -127,7 +137,7 @@ public class Profil {
                 ", mail='" + mail + '\'' +
                 ", adresse='" + adresse + '\'' +
                 ", actif='" + actif + '\'' +
-                ", description='" + description + '\'' +
+                ", categorie='" + categorie + '\'' +
                 '}';
     }
 }

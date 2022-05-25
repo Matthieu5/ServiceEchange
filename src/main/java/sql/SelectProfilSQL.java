@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class SelectProfilSQL {
     public ArrayList getSQLProfil(String id) throws Exception {
         ArrayList infos = new ArrayList<>();
+        String categorie = null;
         try {
 
             //étape 1: charger la classe de driver
@@ -33,7 +34,7 @@ public class SelectProfilSQL {
                 infos.add(res.getObject(6).toString());
             }
             //étape 3: créer l'objet statement
-            String query2 = "SELECT date_inscription, moyenne_utilisateur, description_utilisateur, compteur_utilisateur, actif FROM utilisateur where id_personne=?";
+            String query2 = "SELECT date_inscription, moyenne_utilisateur, description_utilisateur, compteur_utilisateur, actif, id_categorie FROM utilisateur where id_personne=?";
             PreparedStatement updateSales2 = con.prepareStatement(query2);
             updateSales2.setInt(1, Integer.parseInt(id));
 
@@ -45,6 +46,16 @@ public class SelectProfilSQL {
                 infos.add(res2.getObject(3).toString());
                 infos.add(res2.getObject(4).toString());
                 infos.add(res2.getObject(5).toString());
+                categorie = res2.getObject(6).toString();
+            }
+            //étape 3: créer l'objet statement
+            String query3 = "SELECT nom_categorie FROM categorie where id_categorie=?";
+            PreparedStatement updateSales3 = con.prepareStatement(query3);
+            updateSales3.setInt(1, Integer.parseInt(categorie));
+            //étape 4: exécuter la requête
+            ResultSet res3 = updateSales3.executeQuery();
+            if(res3.next()) {
+                infos.add(res3.getObject(1).toString());
             }
 
             //étape 5: fermez l'objet de connexion

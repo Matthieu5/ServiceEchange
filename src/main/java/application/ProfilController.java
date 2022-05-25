@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static application.Profil.*;
+import static application.Profil.getCategorie;
 
 public class ProfilController implements Initializable {
     @FXML
@@ -31,11 +32,13 @@ public class ProfilController implements Initializable {
     @FXML
     private TextField actifProfil;
     @FXML
-    private TextField descriptionProfil;
+    private TextField categorieProfil;
+    @FXML
+    private TextField description;
 
     @FXML
     protected void ModifierProfil() {
-        Main.modifierProfil("ModifierProfil", nomProfil.getText(), prenomProfil.getText(), telProfil.getText(), ageProfil.getText(), mailProfil.getText(), adresseProfil.getText(), "test", actifProfil.getText());
+        Main.modifierProfil("ModifierProfil", nomProfil.getText(), prenomProfil.getText(), telProfil.getText(), ageProfil.getText(), mailProfil.getText(), adresseProfil.getText(), categorieProfil.getText(), actifProfil.getText(), description.getText());
     }
 
     public void redirectionCategorie(ActionEvent actionEvent) {
@@ -55,12 +58,14 @@ public class ProfilController implements Initializable {
         ageProfil.setText(getAge());
         dateInscriptionProfil.setText(getDateInscription());
         noteProfil.setText(getNote());
-        actifProfil.setText(getActif());
-        if(getActif().equals(true)) {
+        System.out.println(getActif());
+        if(getActif().equals("true")) {
             actifProfil.setText("Actif");
         } else {
             actifProfil.setText("Pas actif");
         }
-        //descriptionProfil.setText(getDescription());
+        System.out.println(getCategorie());
+        categorieProfil.setText(getCategorie());
+        description.setText(getDescription());
     }
 }

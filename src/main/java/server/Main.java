@@ -79,13 +79,14 @@ public class Main {
                 String description = String.valueOf(infos.get(8));
                 String compteur = String.valueOf(infos.get(9));
                 String actif = String.valueOf(infos.get(10));
+                String categorie = String.valueOf(infos.get(11));
 
-                socket.sendPacket(new DemandeProfilPacketReturn(nom, prenom, tel, mail, adresse, age, dateInscription, moyenne, description, compteur, actif));
+                socket.sendPacket(new DemandeProfilPacketReturn(nom, prenom, tel, mail, adresse, age, dateInscription, moyenne, description, compteur, actif, categorie));
             }
         } else if(message.getString("typePacket").equals("ModifierProfil")) {
             UpdateProfilSQL ups = new UpdateProfilSQL();
             System.out.println(token.get(socket.getSocket().getInetAddress().toString().substring(1)));
-            Boolean retour = ups.updateProfilSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("telephone"), message.getString("age"), message.getString("email"), message.getString("adresse"), message.getString("description"), message.getString("actif"));
+            Boolean retour = ups.updateProfilSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("telephone"), message.getString("age"), message.getString("email"), message.getString("adresse"), message.getString("categorie"), message.getString("actif"), message.getString("description"));
             if(retour.equals(true)) {
                 socket.sendPacket(new UpdateProfilPacketReturn("true"));
             } else {
@@ -128,7 +129,7 @@ public class Main {
 
     public static class DemandeProfilPacketReturn extends Packet {
 
-        public DemandeProfilPacketReturn(String nom, String prenom, String tel, String mail, String adresse, String age, String dateInscription, String moyenne, String description, String compteur, String actif){
+        public DemandeProfilPacketReturn(String nom, String prenom, String tel, String mail, String adresse, String age, String dateInscription, String moyenne, String description, String compteur, String actif, String categorie){
             getObject().put("typePacket", "Demande Profil retour");
             getObject().put("nom", nom);
             getObject().put("prenom", prenom);
@@ -141,6 +142,7 @@ public class Main {
             getObject().put("description", description);
             getObject().put("compteur", compteur);
             getObject().put("actif", actif);
+            getObject().put("categorie", categorie);
         }
     }
 }

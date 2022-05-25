@@ -4,11 +4,31 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
 public class UpdateProfilSQL  {
 
-    public Boolean updateProfilSQL(String id, String nom, String prenom, String tel, String age, String mail, String adresse, String description, String actif) throws Exception {
+    public Boolean updateProfilSQL(String id, String nom, String prenom, String tel, String age, String mail, String adresse, String categorie, String actif, String description) throws Exception {
+
+        if(categorie.equals("Jardinage")) {
+            categorie = "1";
+        } else if(categorie.equals("Maçonnerie")) {
+            categorie = "2";
+        } else if(categorie.equals("Electricité")) {
+            categorie = "3";
+        } else if(categorie.equals("Peinture")) {
+            categorie = "4";
+        } else if(categorie.equals("Plomberie")) {
+            categorie = "5";
+        } else if(categorie.equals("Autre")) {
+            categorie = "6";
+        }
+
+        if(actif.equals("Actif")) {
+            actif = "true";
+        } else {
+            actif = "false";
+        }
+
         try {
 
             //étape 1: charger la classe de driver
@@ -31,14 +51,22 @@ public class UpdateProfilSQL  {
 
             ResultSet res = updateSales.executeQuery();
 
-            //étape 3: créer l'objet statement
-            String query2 = "UPDATE utilisateur set description_utilisateur=?, actif=? where id_personne=?";
-            PreparedStatement updateSales2 = con.prepareStatement(query2);
-            updateSales2.setString(1, description);
-            updateSales2.setBoolean(2, Boolean.parseBoolean(actif));
-            updateSales2.setInt(3, Integer.parseInt(id));
+            System.out.println("step3");
 
-            ResultSet res2 = updateSales.executeQuery();
+            //étape 3: créer l'objet statement
+            String query2 = "UPDATE utilisateur set actif=?, id_categorie=?, description_utilisateur where id_personne=?";
+            PreparedStatement updateSales2 = con.prepareStatement(query2);
+
+            System.out.println("step4");
+
+            updateSales2.setBoolean(1, Boolean.parseBoolean(actif));
+            updateSales2.setInt(2, Integer.parseInt(categorie));
+            updateSales2.setInt(3, Integer.parseInt(description));
+            updateSales2.setInt(4, Integer.parseInt(id));
+
+            ResultSet res2 = updateSales2.executeQuery();
+
+            System.out.println("step5");
 
             //étape 5: fermez l'objet de connexion
             con.close();
