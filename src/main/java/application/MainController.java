@@ -49,4 +49,8 @@ public class MainController {
     public void redirectionCategorie(ActionEvent actionEvent) {
         Main.showCategorieOverview();
     }
+
+    public void close() {
+        System.exit(0);
+    }
 }

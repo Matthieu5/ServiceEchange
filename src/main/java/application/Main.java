@@ -181,10 +181,6 @@ public class Main extends Application {
         demandeProfil("DemandeProfil");
     }
 
-    public static void afficherProfilCategorie(String typePacket,String categorie) {
-        socketClientGlobal.sendPacket(new AfficherProfilCategoriePacket(typePacket,categorie));
-    }
-
     public static void connexionMain(String typePacket, String id, String mdp) {
         socketClientGlobal.sendPacket(new LoginPacket(typePacket, id, mdp));
     }
