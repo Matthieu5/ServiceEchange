@@ -92,7 +92,7 @@ public class Main {
         }else if(message.getString("typePacket").equals("obtenirCategorie")) {
             ObtenirProfil op = new ObtenirProfil();
             HashMap infos = op.getAllProfilsCategorie(message.getString("categorie"));
-            System.out.println("reonrejgeoire");
+            System.out.println(infos);
             if(infos.isEmpty()) {
                 System.out.println("Aucun profil trouvé");
             } else {

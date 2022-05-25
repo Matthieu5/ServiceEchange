@@ -9,7 +9,10 @@ import java.util.HashMap;
 
 public class ObtenirProfil {
     public HashMap getAllProfilsCategorie(String categorie) throws Exception {
-        HashMap infos = new HashMap<>();
+        HashMap infos = new HashMap<Integer,ArrayList >();
+        ArrayList arrayInfo= new ArrayList<>();
+
+
         try {
 
             //étape 1: charger la classe de driver
@@ -32,9 +35,13 @@ public class ObtenirProfil {
             int compteur = 1;
 
             if(res.next()) {
-                infos.put(compteur,res.getObject(1).toString());
-                infos.put(compteur,res.getObject(2).toString());
-                infos.put(compteur,res.getObject(3).toString());
+                arrayInfo.add(res.getObject(1).toString());
+                arrayInfo.add(res.getObject(2).toString());
+                arrayInfo.add(res.getObject(3).toString());
+
+                infos.put(compteur,arrayInfo);
+
+                arrayInfo.clear();
                 compteur++;
             }
             //étape 5: fermez l'objet de connexion
