@@ -26,7 +26,7 @@ public class Main extends Application {
         this.stage = stage;
         this.stage.setTitle("Service Exchanges");
 
-        SocketClient socketclient = new SocketClient("192.168.43.202", 25566)
+        SocketClient socketclient = new SocketClient("192.168.1.23", 25566)
                 .addConnectEvent(onConnect -> System.out.println("Connected!"))
                 .addDisconnectEvent(onDisconnect -> System.out.println("Disconnected!"))
                 .addPacketReceivedEvent(((socket, packet) -> {
@@ -161,7 +161,7 @@ public class Main extends Application {
         });
     }
 
-    public static void showProfilsOverview(String text) {
+    public static void showProfilsOverview() {
         Platform.runLater(() -> {
             try {
                 // Load connexion overview.
@@ -199,6 +199,10 @@ public class Main extends Application {
 
     public static void deconnexionMain(String typePacket) {
         socketClientGlobal.sendPacket(new DeconnexionPacket(typePacket));
+    }
+
+    public static void afficherProfilCategorie(String typePacket,String categorie) {
+        socketClientGlobal.sendPacket(new AfficherProfilCategoriePacket(typePacket,categorie));
     }
 
     public static void showPrestationOverview() {

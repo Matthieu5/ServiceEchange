@@ -49,24 +49,18 @@ public class UpdateProfilSQL  {
             updateSales.setInt(6, Integer.parseInt(age));
             updateSales.setInt(7, Integer.parseInt(id));
 
-            ResultSet res = updateSales.executeQuery();
-
-            System.out.println("step3");
+            updateSales.executeUpdate();
 
             //étape 3: créer l'objet statement
-            String query2 = "UPDATE utilisateur set actif=?, id_categorie=?, description_utilisateur where id_personne=?";
+            String query2 = "UPDATE utilisateur set actif=?, id_categorie=?, description_utilisateur=? where id_personne=?";
             PreparedStatement updateSales2 = con.prepareStatement(query2);
-
-            System.out.println("step4");
 
             updateSales2.setBoolean(1, Boolean.parseBoolean(actif));
             updateSales2.setInt(2, Integer.parseInt(categorie));
-            updateSales2.setInt(3, Integer.parseInt(description));
+            updateSales2.setString(3, description);
             updateSales2.setInt(4, Integer.parseInt(id));
 
-            ResultSet res2 = updateSales2.executeQuery();
-
-            System.out.println("step5");
+            updateSales2.executeUpdate();
 
             //étape 5: fermez l'objet de connexion
             con.close();
