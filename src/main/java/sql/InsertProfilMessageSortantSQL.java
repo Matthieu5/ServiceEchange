@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class InsertProfilMessageSortantSQL {
-    public Boolean getInsertProfilMessageSortantSQL(String id, String nom, String prenom, String categorie, String message) throws Exception {
+    public Boolean getInsertProfilMessageSortantSQL(String id, String nom, String prenom, String message) throws Exception {
         String id_destinataire = null;
         try {
 

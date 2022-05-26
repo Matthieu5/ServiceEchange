@@ -229,8 +229,8 @@ public class Main extends Application {
         socketClientGlobal.sendPacket(new ModifProfilPacket(typePacket,nom,prenom,tel,age,mail,adresse,categorie,actif,description));
     }
 
-    public static void envoyerMessage(String typePacket, String nom, String prenom, String categorie, String message) {
-        socketClientGlobal.sendPacket(new MessagePacket(typePacket, nom, prenom, categorie, message));
+    public static void envoyerMessage(String typePacket, String nom, String prenom, String message) {
+        socketClientGlobal.sendPacket(new MessagePacket(typePacket, nom, prenom, message));
     }
 
     public static void recupererMessage(String typePacket, String nom, String prenom) {

@@ -38,6 +38,9 @@ public class ProfilsCategorieController implements Initializable {
     @FXML
     private Label note;
 
+    protected static String nomFormat;
+    protected static String prenomFormat;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -101,10 +104,10 @@ public class ProfilsCategorieController implements Initializable {
     @FXML
     private void redirectionMessage() {
 
-        String nomFormat = String.valueOf(nom);
+        nomFormat = String.valueOf(nom);
         nomFormat = nomFormat.substring(32, nomFormat.length() - 1);
 
-        String prenomFormat = String.valueOf(prenom);
+        prenomFormat = String.valueOf(prenom);
         prenomFormat = prenomFormat.substring(35, prenomFormat.length() - 1);
 
         Main.showMessageOverview(nomFormat, prenomFormat);
@@ -153,5 +156,13 @@ public class ProfilsCategorieController implements Initializable {
         public String toString () {
             return this.getName() + this.getFirstName() + this.getDescription();
         }
+    }
+
+    public static String getNomFormat() {
+        return nomFormat;
+    }
+
+    public static String getPrenomFormat() {
+        return prenomFormat;
     }
 }

@@ -104,9 +104,9 @@ public class Main {
             }
         } else if(message.getString("typePacket").equals("EnvoiMessage")) {
             InsertProfilMessageSortantSQL ipmss = new InsertProfilMessageSortantSQL();
-            Boolean retourSortant = ipmss.getInsertProfilMessageSortantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("categorie"), message.getString("message"));
+            Boolean retourSortant = ipmss.getInsertProfilMessageSortantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("message"));
             InsertProfilMessageEntrantSQL ipmes = new InsertProfilMessageEntrantSQL();
-            Boolean retourEntrant = ipmes.getInsertProfilMessageEntrantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("categorie"), message.getString("message"));
+            Boolean retourEntrant = ipmes.getInsertProfilMessageEntrantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("message"));
 
 
             if(retourSortant.equals(true) && retourEntrant.equals(true)) {
