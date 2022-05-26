@@ -196,6 +196,22 @@ public class Main extends Application {
         demandeProfil("DemandeProfil");
     }
 
+    public static void showMessageOverview() {
+        Platform.runLater(() -> {
+            try {
+                // Load connexion overview.
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(Main.class.getResource("/view/messageOverview.fxml"));
+                AnchorPane messageOverview = (AnchorPane) loader.load();
+
+                // Set connexion overview into the center of root layout.
+                rootLayout.setCenter(messageOverview);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     public static void connexionMain(String typePacket, String id, String mdp) {
         socketClientGlobal.sendPacket(new LoginPacket(typePacket, id, mdp));
     }
@@ -210,6 +226,10 @@ public class Main extends Application {
 
     public static void modifierProfil(String typePacket, String nom, String prenom, String tel, String age, String mail, String adresse, String categorie, String actif, String description) {
         socketClientGlobal.sendPacket(new ModifProfilPacket(typePacket,nom,prenom,tel,age,mail,adresse,categorie,actif,description));
+    }
+
+    public static void envoyerMessage(String typePacket, String message) {
+        socketClientGlobal.sendPacket(new MessagePacket(typePacket, message));
     }
 
     public static void deconnexionMain(String typePacket) {
