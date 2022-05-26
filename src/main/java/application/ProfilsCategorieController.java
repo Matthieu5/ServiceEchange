@@ -13,7 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import packet.AfficherProfilCategoriePacket;
 import packet.LoginPacket;
-
+import com.google.gson.Gson;
 import java.net.NetworkInterface;
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,15 +27,15 @@ public class ProfilsCategorieController implements Initializable {
     @FXML
     private Label TitreCategorie;
     @FXML
-    private TableView <Customer> ProfilListe;
+    private TableView <Person> ProfilListe;
     @FXML
-    private TableColumn<Customer, String> nomColumn;
+    private TableColumn<Person, String> nomColumn;
 
     @FXML
-    private TableColumn<Customer, Integer> prenomColumn;
+    private TableColumn<Person, String> prenomColumn;
 
     @FXML
-    private TableColumn<Customer, Integer> descriptionColumn;
+    private TableColumn<Person, String> descriptionColumn;
 
 
     @Override
@@ -51,42 +51,41 @@ public class ProfilsCategorieController implements Initializable {
                     public void run() {
                         try {
                             JSONArray js = ProfilCategorie.getProfils();
-                            JSONObject test;
+
+                            ObservableList<Person> persons = ProfilListe.getItems();
+                            nomColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("name"));
+                            prenomColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("firstName"));
+                            descriptionColumn.setCellValueFactory(new PropertyValueFactory<Person, String>("Description"));
                             for (int i=0; i < js.length(); i++) {
-                                System.out.println(js.get(i));
-                                System.out.println(new Gson().toJson(mobilePhone));)
-
+                                Person p = new Person();
+                                for (int j=0; j < js.getJSONArray(i).length(); j++) {
+                                    if(j==0) {
+                                        p.setName(js.getJSONArray(i).get(j).toString());
+                                    }else if (j==1) {
+                                        p.setFirstName(js.getJSONArray(i).get(j).toString());
+                                    }else if (j==2) {
+                                        p.setDescription(js.getJSONArray(i).get(j).toString());
+                                    }
+                                }
+                                persons.add(p);
                             }
-
-
-                            nomColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("name"));
-                            prenomColumn.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("age"));
-                            descriptionColumn.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("number"));
-
-                            Customer customer = new Customer("alexis",
-                                    Integer.parseInt("16"),
-                                    Integer.parseInt("16"));
-
-
-                            ObservableList<Customer> customers = ProfilListe.getItems();
-                            customers.add(customer);
-                            ProfilListe.setItems(customers);
-
-
+                            ProfilListe.setItems(persons);
 
                         } catch (NumberFormatException e) {
                             e.printStackTrace();
                         }
-
                     }
                 },
                 1000
         );
-
     }
 
     @FXML
     private void redirectionCategorie() {
+        Main.showCategorieOverview();
+    }
+    @FXML
+    private void redirectionMessage() {
         Main.showCategorieOverview();
     }
 
@@ -95,16 +94,16 @@ public class ProfilsCategorieController implements Initializable {
         return cg.getProfilName();
     }
 
-    public class Customer {
+    public class Person {
 
         private String name;
-        private int age;
-        private int number;
+        private String firstName;
+        private String description;
 
-        public Customer(String name, int age, int number) {
-            this.name = name;
-            this.age = age;
-            this.number = number;
+        public Person() {
+            this.name = "";
+            this.firstName = "";
+            this.description = "";
         }
 
         public String getName() {
@@ -115,20 +114,23 @@ public class ProfilsCategorieController implements Initializable {
             this.name = name;
         }
 
-        public int getAge() {
-            return age;
+        public String getDescription() {
+            return description;
         }
 
-        public void setAge(int age) {
-            this.age = age;
+        public void setDescription(String description) {
+            this.description = description;
         }
 
-        public int getNumber() {
-            return number;
+        public String getFirstName() {
+            return firstName;
         }
 
-        public void setNumber(int number) {
-            this.number = number;
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+        }
+        public String toString () {
+            return this.getName() + this.getFirstName() + this.getDescription();
         }
     }
 }

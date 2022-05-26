@@ -5,6 +5,7 @@ module application.serviceechange {
     requires java.sql;
     requires LWSL;
     requires json;
+    requires com.google.gson;
 
 
     opens application to javafx.fxml;
