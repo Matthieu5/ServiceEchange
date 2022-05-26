@@ -33,7 +33,8 @@ public class InscriptionController {
     @FXML
     protected void valider() throws NumberFormatException {
             try {
-                if (mdp.getText() == confirmMdp.getText()) {
+
+                if (mdp.getText().equals(confirmMdp.getText())) {
                     Main.inscriptionMain("Inscription", nom.getText(), prenom.getText(), telephone.getText(), email.getText(), adresse.getText(), Integer.parseInt(age.getText()), mdp.getText(), identifiant.getText());
                 }else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
