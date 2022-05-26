@@ -100,7 +100,14 @@ public class ProfilsCategorieController implements Initializable {
     }
     @FXML
     private void redirectionMessage() {
-        Main.showCategorieOverview();
+
+        String nomFormat = String.valueOf(nom);
+        nomFormat = nomFormat.substring(32, nomFormat.length() - 1);
+
+        String prenomFormat = String.valueOf(prenom);
+        prenomFormat = prenomFormat.substring(35, prenomFormat.length() - 1);
+
+        Main.showMessageOverview(nomFormat, prenomFormat);
     }
 
     private String getTitreCategorie() {
