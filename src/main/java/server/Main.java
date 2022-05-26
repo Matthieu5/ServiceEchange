@@ -1,6 +1,5 @@
 package server;
 
-import application.ProfilCategorie;
 import org.json.JSONObject;
 import sql.*;
 import xyz.baddeveloper.lwsl.packet.Packet;
@@ -104,27 +103,29 @@ public class Main {
                 socket.sendPacket(new AfficherProfilCategoriePacketReturn(infos));
             }
         } else if(message.getString("typePacket").equals("EnvoiMessage")) {
-            InsertProfilMessageSQL ipms = new InsertProfilMessageSQL();
-            Boolean retour = ipms.getInsertProfilMessageSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("categorie"), message.getString("message"));
-            if(retour.equals(true)) {
-                SelectProfilMessageSQL spms = new SelectProfilMessageSQL();
-                ArrayList messages = spms.getSelectProfilMessageSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("categorie"));
-                if(messages.isEmpty()) {
-                    System.out.println("Erreur lecture message");
-                } else {
-                    socket.sendPacket(new MessagePacketReturn(messages));
-                }
+            InsertProfilMessageSortantSQL ipmss = new InsertProfilMessageSortantSQL();
+            Boolean retourSortant = ipmss.getInsertProfilMessageSortantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("categorie"), message.getString("message"));
+            InsertProfilMessageEntrantSQL ipmes = new InsertProfilMessageEntrantSQL();
+            Boolean retourEntrant = ipmes.getInsertProfilMessageEntrantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("categorie"), message.getString("message"));
+
+
+            if(retourSortant.equals(true) && retourEntrant.equals(true)) {
+                SelectProfilMessageSortantSQL spmss = new SelectProfilMessageSortantSQL();
+                ArrayList messagesSortant = spmss.getSelectProfilMessageSortantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"));
+                SelectProfilMessageEntrantSQL spmes = new SelectProfilMessageEntrantSQL();
+                ArrayList messagesEntrant = spmes.getSelectProfilMessageEntrantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"));
+
+                socket.sendPacket(new MessagePacketReturn(messagesSortant, messagesEntrant));
             } else {
                 System.out.println("Erreur Envoi message");
             }
         }  else if(message.getString("typePacket").equals("RecupMessage")) {
-            SelectProfilMessageSQL spms = new SelectProfilMessageSQL();
-            ArrayList messages = spms.getSelectProfilMessageSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("categorie"));
-            if (messages.isEmpty()) {
-                System.out.println("Erreur lecture message");
-            } else {
-                socket.sendPacket(new MessagePacketReturn(messages));
-            }
+            SelectProfilMessageSortantSQL spmss = new SelectProfilMessageSortantSQL();
+            ArrayList messagesSortant = spmss.getSelectProfilMessageSortantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"));
+            SelectProfilMessageEntrantSQL spmes = new SelectProfilMessageEntrantSQL();
+            ArrayList messagesEntrant = spmes.getSelectProfilMessageEntrantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"));
+
+            socket.sendPacket(new MessagePacketReturn(messagesSortant, messagesEntrant));
         }
     }
 
@@ -162,9 +163,10 @@ public class Main {
 
     public static class MessagePacketReturn extends Packet {
 
-        public MessagePacketReturn(ArrayList messages){
+        public MessagePacketReturn(ArrayList messagesSortant, ArrayList messagesEntrant){
             getObject().put("typePacket", "Message retour");
-            getObject().put("messages", messages);
+            getObject().put("messagesSortant", messagesSortant);
+            getObject().put("messagesEntrant", messagesEntrant);
         }
     }
 
