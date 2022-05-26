@@ -29,9 +29,9 @@
          <children>
             <TableView fx:id="ProfilListe" prefHeight="500.0" prefWidth="344.0">
               <columns>
-                  <TableColumn fx:id="nomColumn" editable="false" resizable="false" text="Nom" />
-                  <TableColumn fx:id="prenomColumn" editable="false" resizable="false" text="Prénom" />
-                  <TableColumn fx:id="descriptionColumn" editable="false" prefWidth="180.80001831054688" resizable="false" text="Description" />
+                 <TableColumn fx:id="nomColumn" prefWidth="75.0" text="Name" />
+                 <TableColumn fx:id="prenomColumn" prefWidth="75.0" text="Age" />
+                 <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Number" />
               </columns>
             </TableView>
             <Label fx:id="nom" text="Label" textAlignment="CENTER" translateX="70.0" translateY="50.0">
@@ -55,6 +55,7 @@
                     <columns>
                       <TableColumn editable="false" prefWidth="355.200018286705" resizable="false" text="Compétences" />
                     </columns>
+
                   </TableView>
                </children>
             </HBox>
