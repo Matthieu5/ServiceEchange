@@ -42,7 +42,7 @@ public class CategorieController  {
 
     @FXML
     protected void redirectionPrestation() {
-        Main.showParametreOverview();
+        Main.showPrestationOverview();
     }
 
     @FXML

@@ -57,7 +57,7 @@
          <children>
             <Button fx:id="btnModifierProfil" mnemonicParsing="false" onAction="#ModifierProfil" text="Modifier" translateX="650.0" translateY="40.0" />
             <Button fx:id="btnRetourProfil" mnemonicParsing="false" onAction="#redirectionCategorie" text="Retour" translateX="700.0" translateY="40.0" />
-            <Button fx:id="btnRafraichir" mnemonicParsing="false" onAction="#entrerDonnees" text="Rafraîchir" translateX="415.0" translateY="40.0" />
+            <Button fx:id="btnRafraichir" mnemonicParsing="false"  text="Rafraîchir" translateX="415.0" translateY="40.0" />
          </children>
       </HBox>
    </children>

@@ -124,6 +124,9 @@ public class Main extends Application {
                 jsonArray.put(songs.get(key));
             }
             pc.setProfils(jsonArray);
+
+        } else if(message.getString("typePacket").equals("Préstation retour")) {
+
         }
     }
 
@@ -213,6 +216,25 @@ public class Main extends Application {
         });
     }
 
+    public static void showPrestationOverview() {
+        afficherPrestation("recupPrestation");
+        Platform.runLater(() -> {
+            try {
+                // Load connexion overview.
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(Main.class.getResource("/view/prestationOverview.fxml"));
+                AnchorPane prestationOverview = (AnchorPane) loader.load();
+
+                // Set connexion overview into the center of root layout.
+                rootLayout.setCenter(prestationOverview);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+
+
     public static void connexionMain(String typePacket, String id, String mdp) {
         socketClientGlobal.sendPacket(new LoginPacket(typePacket, id, mdp));
     }
@@ -245,21 +267,11 @@ public class Main extends Application {
         socketClientGlobal.sendPacket(new AfficherProfilCategoriePacket(typePacket,categorie));
     }
 
-    public static void showPrestationOverview() {
-        Platform.runLater(() -> {
-            try {
-                // Load connexion overview.
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("/view/prestationOverview.fxml"));
-                AnchorPane prestationOverview = (AnchorPane) loader.load();
-
-                // Set connexion overview into the center of root layout.
-                rootLayout.setCenter(prestationOverview);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+    public static void afficherPrestation(String typePacket) {
+        socketClientGlobal.sendPacket(new PrestationPacket(typePacket));
     }
+
+
 
     public Stage getStage() {
         return stage;
