@@ -27,24 +27,24 @@
       </HBox>
       <HBox prefHeight="500.0" prefWidth="900.0" translateY="100.0">
          <children>
-            <TableView fx:id="ProfilListe" prefHeight="500.0" prefWidth="344.0">
+            <TableView fx:id="ProfilListe"  prefHeight="500.0" prefWidth="344.0">
               <columns>
-                  <TableColumn fx:id="nomColumn" editable="false" resizable="false" text="Nom" />
-                  <TableColumn fx:id="prenomColumn" editable="false" resizable="false" text="Prénom" />
-                  <TableColumn fx:id="descriptionColumn" editable="false" prefWidth="180.80001831054688" resizable="false" text="Description" />
+                 <TableColumn fx:id="nomColumn" prefWidth="75.0" text="Nom" />
+                 <TableColumn fx:id="prenomColumn" prefWidth="75.0" text="Prénom" />
+                 <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Description" />
               </columns>
             </TableView>
-            <Label fx:id="nom" text="Label" textAlignment="CENTER" translateX="70.0" translateY="50.0">
+            <Label fx:id="nom" text="" textAlignment="CENTER" translateX="70.0" translateY="50.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="prenom" text="Label" textAlignment="CENTER" translateX="225.0" translateY="50.0">
+            <Label fx:id="prenom" text="" textAlignment="CENTER" translateX="225.0" translateY="50.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="note" text="Label" textAlignment="CENTER" translateX="388.0" translateY="50.0">
+            <Label fx:id="note" text="" textAlignment="CENTER" translateX="388.0" translateY="50.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -55,6 +55,7 @@
                     <columns>
                       <TableColumn editable="false" prefWidth="355.200018286705" resizable="false" text="Compétences" />
                     </columns>
+
                   </TableView>
                </children>
             </HBox>

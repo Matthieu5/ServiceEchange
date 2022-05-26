@@ -1,5 +1,6 @@
 package server;
 
+import application.ProfilCategorie;
 import org.json.JSONObject;
 import sql.*;
 import xyz.baddeveloper.lwsl.packet.Packet;
@@ -45,8 +46,11 @@ public class Main {
             }
         } else if(message.getString("typePacket").equals("Inscription")) {
             AddUserSQL aus = new AddUserSQL();
+            ConnectUserSQL cus = new ConnectUserSQL();
 
             if(aus.add(message.getString("nom"),message.getString("prenom"),message.getString("telephone"),message.getString("email"),message.getString("adresse"), message.getInt("age"),message.getString("mdp"),message.getString("login")) == true) {
+                token.put(socket.getSocket().getInetAddress().toString().substring(1),cus.getSQLServerConnection(message.getString("login"), message.getString("mdp")));
+                System.out.println(token);
                 socket.sendPacket(new InscriptionPacketReturn("true"));
             } else {
                 socket.sendPacket(new InscriptionPacketReturn("false"));
@@ -91,36 +95,22 @@ public class Main {
             }
         }else if(message.getString("typePacket").equals("obtenirCategorie")) {
             ObtenirProfil op = new ObtenirProfil();
-            HashMap infos = op.getAllProfilsCategorie(message.getString("categorie"));
-            System.out.println(infos);
+            HashMap infos = op.getAllProfilsCategorie(message.getString("categorie"),token.get(socket.getSocket().getInetAddress().toString().substring(1)));
+
             if(infos.isEmpty()) {
                 System.out.println("Aucun profil trouvé");
+                socket.sendPacket(new AfficherProfilCategoriePacketReturn(new HashMap()));
             } else {
-                /*socket.sendPacket(new DemandeProfilPacketReturn(nom, prenom, tel, mail, adresse, age, dateInscription, moyenne, description, compteur, actif));
-                socket.sendPacket(new UpdateProfilPacketReturn("true"));*/
+                socket.sendPacket(new AfficherProfilCategoriePacketReturn(infos));
             }
-        } else if(message.getString("typePacket").equals("EnvoiMessage")) {
-            InsertProfilMessageSQL ipms = new InsertProfilMessageSQL();
-            Boolean retour = ipms.getInsertProfilMessageSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("categorie"), message.getString("message"));
-            if(retour.equals(true)) {
-                SelectProfilMessageSQL spms = new SelectProfilMessageSQL();
-                ArrayList messages = spms.getSelectProfilMessageSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("categorie"));
-                if(messages.isEmpty()) {
-                    System.out.println("Erreur lecture message");
-                } else {
-                    socket.sendPacket(new MessagePacketReturn(messages));
-                }
-            } else {
-                System.out.println("Erreur Envoi message");
-            }
-        }  else if(message.getString("typePacket").equals("RecupMessage")) {
-            SelectProfilMessageSQL spms = new SelectProfilMessageSQL();
-            ArrayList messages = spms.getSelectProfilMessageSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("categorie"));
-            if (messages.isEmpty()) {
-                System.out.println("Erreur lecture message");
-            } else {
-                socket.sendPacket(new MessagePacketReturn(messages));
-            }
+        }
+    }
+
+    public static class AfficherProfilCategoriePacketReturn extends Packet {
+
+        public AfficherProfilCategoriePacketReturn(HashMap tableauInfos){
+            getObject().put("typePacket", "Profil Categorie retour");
+            getObject().put("tableauInfos", tableauInfos);
         }
     }
 
@@ -145,14 +135,6 @@ public class Main {
         public UpdateProfilPacketReturn(String reponse){
             getObject().put("typePacket", "Update Profil retour");
             getObject().put("message", reponse);
-        }
-    }
-
-    public static class MessagePacketReturn extends Packet {
-
-        public MessagePacketReturn(ArrayList messages){
-            getObject().put("typePacket", "Message retour");
-            getObject().put("messages", messages);
         }
     }
 

@@ -10,7 +10,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import org.json.JSONArray;
 import packet.*;
 import xyz.baddeveloper.lwsl.client.SocketClient;
 import xyz.baddeveloper.lwsl.client.exceptions.ConnectException;
@@ -112,7 +114,16 @@ public class Main extends Application {
             System.out.println(message.getString("message"));
 
         } else if(message.getString("typePacket").equals("Profil Categorie retour")) {
+            JSONObject songs= message.getJSONObject("tableauInfos");
+            Iterator x = songs.keys();
+            JSONArray jsonArray = new JSONArray();
+            ProfilCategorie pc = new ProfilCategorie(new JSONArray());
 
+            while (x.hasNext()){
+                String key = (String) x.next();
+                jsonArray.put(songs.get(key));
+            }
+            pc.setProfils(jsonArray);
         }
     }
 

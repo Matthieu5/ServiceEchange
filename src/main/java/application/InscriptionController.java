@@ -1,6 +1,7 @@
 package application;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -32,9 +33,23 @@ public class InscriptionController {
     @FXML
     protected void valider() throws NumberFormatException {
             try {
-                Main.inscriptionMain("Inscription", nom.getText(), prenom.getText(), telephone.getText(), email.getText(), adresse.getText(), Integer.parseInt(age.getText()), mdp.getText(), identifiant.getText());
+
+                if (mdp.getText().equals(confirmMdp.getText())) {
+                    Main.inscriptionMain("Inscription", nom.getText(), prenom.getText(), telephone.getText(), email.getText(), adresse.getText(), Integer.parseInt(age.getText()), mdp.getText(), identifiant.getText());
+                }else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Mot de passe non valide");
+                    alert.setContentText("La confirmation du mot de passe n'est pas valide");
+                    alert.showAndWait();
+                    System.out.println("La confirmation de mdp n'est pas valide");
+                }
+
             }catch (NumberFormatException e) {
-                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Champs renseignés non valide");
+                alert.setContentText("Un ou plusieurs des caractères ne sont pas valides");
+                alert.showAndWait();
+                System.out.println("Un ou plusieurs des caractères ne sont pas valides");
             }
     }
 
