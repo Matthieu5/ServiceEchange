@@ -103,13 +103,11 @@ public class Main {
                 socket.sendPacket(new AfficherProfilCategoriePacketReturn(infos));
             }
         } else if(message.getString("typePacket").equals("EnvoiMessage")) {
-            InsertProfilMessageSortantSQL ipmss = new InsertProfilMessageSortantSQL();
-            Boolean retourSortant = ipmss.getInsertProfilMessageSortantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("message"));
-            InsertProfilMessageEntrantSQL ipmes = new InsertProfilMessageEntrantSQL();
-            Boolean retourEntrant = ipmes.getInsertProfilMessageEntrantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("message"));
+            InsertProfilMessageSQL ipms = new InsertProfilMessageSQL();
+            Boolean retour = ipms.getInsertProfilMessageSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"), message.getString("message"));
 
 
-            if(retourSortant.equals(true) && retourEntrant.equals(true)) {
+            if(retour.equals(true)) {
                 SelectProfilMessageSortantSQL spmss = new SelectProfilMessageSortantSQL();
                 ArrayList messagesSortant = spmss.getSelectProfilMessageSortantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"));
                 SelectProfilMessageEntrantSQL spmes = new SelectProfilMessageEntrantSQL();
@@ -126,12 +124,9 @@ public class Main {
             ArrayList messagesEntrant = spmes.getSelectProfilMessageEntrantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"));
 
             socket.sendPacket(new MessagePacketReturn(messagesSortant, messagesEntrant));
-
-        }else if(message.getString("typePacket").equals("recupPrestation")) {
-            RecupPrestation rp = new RecupPrestation();
-            HashMap prestation = rp.getAllPrestation(token.get(socket.getSocket().getInetAddress().toString().substring(1)));
-            socket.sendPacket(new prestationPacketReturn(prestation));
-
+        } else if (message.getString("typePacket").equals("PropositionPrestation")) {
+            InsertPropositionPrestationSQL ipps = new InsertPropositionPrestationSQL();
+            Boolean retour = ipps.getPropositionPrestationSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nbHeure"), message.getString("descriptionPrestation"), message.getString("nomDestinataire"), message.getString("prenomDestinataire"));
         }
     }
 
@@ -181,13 +176,6 @@ public class Main {
         public DeconnexionPacketReturn(String reponse){
             getObject().put("typePacket", "Deconnexion retour");
 
-        }
-    }
-
-    public static class prestationPacketReturn extends Packet {
-        public prestationPacketReturn(HashMap tabPrestation){
-            getObject().put("typePacket", "prestation retour");
-            getObject().put("tabPrestation", tabPrestation);
         }
     }
 

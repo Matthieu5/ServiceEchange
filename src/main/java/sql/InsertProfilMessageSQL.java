@@ -1,12 +1,9 @@
 package sql;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
-public class InsertProfilMessageEntrantSQL {
-    public Boolean getInsertProfilMessageEntrantSQL(String id, String nom, String prenom, String message) throws Exception {
+public class InsertProfilMessageSQL {
+    public Boolean getInsertProfilMessageSQL(String id, String nom, String prenom, String message) throws Exception {
         String id_destinataire = null;
         try {
 
@@ -30,13 +27,14 @@ public class InsertProfilMessageEntrantSQL {
                 id_destinataire = res.getObject(1).toString();
             }
 
-
             //étape 3: créer l'objet statement
-            String query2 = "INSERT libelle_message, id_personne, id_personne_1 FROM message;";
+            String query2 = "INSERT INTO message(libelle_message, timestamp_message, id_personne, id_personne_1) VALUES (?,?,?,?);";
             PreparedStatement updateSales2 = con.prepareStatement(query2);
             updateSales2.setString(1, message);
-            updateSales2.setInt(2, Integer.parseInt(id_destinataire));
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            updateSales2.setTimestamp(2, timestamp);
             updateSales2.setInt(3, Integer.parseInt(id));
+            updateSales2.setInt(4, Integer.parseInt(id_destinataire));
 
             //étape 4: exécuter la requête
             updateSales2.executeUpdate();

@@ -17,20 +17,21 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" text="Profil" translateX="400.0" translateY="20.0" />
-            <Button mnemonicParsing="false" text="Préstations" translateX="420.0" translateY="20.0" />
-            <Button mnemonicParsing="false" text="Déconnexion" translateX="440.0" translateY="20.0" />
+            <Button mnemonicParsing="false" fx:id="profil"  onAction="#redirectionProfil" text="Profil" translateX="400.0" translateY="20.0" />
+            <Button mnemonicParsing="false" fx:id="retour" onAction="#redirectionRetour" text="Retour" translateX="420.0" translateY="20.0" />
+            <Button mnemonicParsing="false" fx:id="deconnexion" onAction="#redirectionDeconnexion" text="Déconnexion" translateX="440.0" translateY="20.0" />
          </children>
       </HBox>
       <HBox layoutX="-2.0" layoutY="135.0" prefHeight="266.0" prefWidth="900.0">
          <children>
-            <TableView prefHeight="266.0" prefWidth="406.0" translateX="250.0">
+            <TableView fx:id="tablePrestations" prefHeight="266.0" prefWidth="406.0" translateX="250.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
-                  <TableColumn prefWidth="75.0" text="Column X" />
+                  <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
+                  <TableColumn fx:id="realiseColumn" prefWidth="75.0" text="Realisé" />
+                  <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Description" />
+                  <TableColumn fx:id="noteColumn" prefWidth="75.0" text="Note" />
+                  <TableColumn fx:id="categorieColumn" prefWidth="75.0" text="Categorie" />
+                  <TableColumn fx:id="nomColumn" prefWidth="75.0" text="Nom" />
               </columns>
             </TableView>
          </children>
