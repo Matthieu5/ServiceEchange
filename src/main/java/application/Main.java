@@ -4,12 +4,12 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Iterator;
 
 import org.json.JSONArray;
@@ -199,8 +199,8 @@ public class Main extends Application {
         demandeProfil("DemandeProfil");
     }
 
-    public static void showMessageOverview() {
-        recupererMessage("RecupMessage", "Boulagnon", "Matthieu", "Jardinage");
+    public static void showMessageOverview(String nom, String prenom) {
+        recupererMessage("RecupMessage", nom, prenom);
         Platform.runLater(() -> {
             try {
                 // Load connexion overview.
@@ -255,8 +255,8 @@ public class Main extends Application {
         socketClientGlobal.sendPacket(new MessagePacket(typePacket, nom, prenom, categorie, message));
     }
 
-    public static void recupererMessage(String typePacket, String nom, String prenom, String categorie) {
-        socketClientGlobal.sendPacket(new MessageRecupPacket(typePacket, nom, prenom, categorie));
+    public static void recupererMessage(String typePacket, String nom, String prenom) {
+        socketClientGlobal.sendPacket(new MessageRecupPacket(typePacket, nom, prenom));
     }
 
     public static void deconnexionMain(String typePacket) {
