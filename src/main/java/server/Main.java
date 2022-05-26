@@ -96,6 +96,7 @@ public class Main {
 
             if(infos.isEmpty()) {
                 System.out.println("Aucun profil trouvé");
+                socket.sendPacket(new AfficherProfilCategoriePacketReturn(new HashMap()));
             } else {
                 socket.sendPacket(new AfficherProfilCategoriePacketReturn(infos));
             }
