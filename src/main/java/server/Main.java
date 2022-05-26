@@ -46,8 +46,11 @@ public class Main {
             }
         } else if(message.getString("typePacket").equals("Inscription")) {
             AddUserSQL aus = new AddUserSQL();
+            ConnectUserSQL cus = new ConnectUserSQL();
 
             if(aus.add(message.getString("nom"),message.getString("prenom"),message.getString("telephone"),message.getString("email"),message.getString("adresse"), message.getInt("age"),message.getString("mdp"),message.getString("login")) == true) {
+                token.put(socket.getSocket().getInetAddress().toString().substring(1),cus.getSQLServerConnection(message.getString("login"), message.getString("mdp")));
+                System.out.println(token);
                 socket.sendPacket(new InscriptionPacketReturn("true"));
             } else {
                 socket.sendPacket(new InscriptionPacketReturn("false"));
