@@ -1,18 +1,25 @@
 package application;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProfilCategorie {
-    protected static HashMap <String, ArrayList> profils;
+    protected static JSONArray profils;
 
-    public ProfilCategorie (HashMap profils) {
+    public ProfilCategorie (JSONArray profils) {
         this.profils=profils;
     }
-    public static HashMap<String, ArrayList> getProfils() {
+    public ProfilCategorie () {
+        this.profils=profils;
+    }
+
+    public static JSONArray getProfils() {
         return profils;
     }
-    public void setProfils(HashMap<String, ArrayList> profils) {
-        this.profils = profils;
+    public static void setProfils(JSONArray jsonArray) {
+        profils = jsonArray;
     }
+
 }
