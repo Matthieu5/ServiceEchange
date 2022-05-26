@@ -185,9 +185,9 @@ public class Main {
     }
 
     public static class prestationPacketReturn extends Packet {
-        public prestationPacketReturn(HashMap prestation){
+        public prestationPacketReturn(HashMap tabPrestation){
             getObject().put("typePacket", "prestation retour");
-            getObject().put("message", prestation);
+            getObject().put("tabPrestation", tabPrestation);
         }
     }
 
