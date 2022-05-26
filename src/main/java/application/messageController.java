@@ -27,7 +27,7 @@ public class messageController {
         String msg = messageBox.getText();
         if (!messageBox.getText().isEmpty()) {
             //Listener.send(msg);
-            Main.envoyerMessage("EnvoiMessage", messageBox.getText());
+            Main.envoyerMessage("EnvoiMessage", "Boulagnon", "Matthieu", "Jardinage", messageBox.getText());
             messageBox.clear();
         }
     }

@@ -186,6 +186,7 @@ public class Main extends Application {
     }
 
     public static void showMessageOverview() {
+        recupererMessage("RecupMessage", "Boulagnon", "Matthieu", "Jardinage");
         Platform.runLater(() -> {
             try {
                 // Load connexion overview.
@@ -217,8 +218,12 @@ public class Main extends Application {
         socketClientGlobal.sendPacket(new ModifProfilPacket(typePacket,nom,prenom,tel,age,mail,adresse,categorie,actif,description));
     }
 
-    public static void envoyerMessage(String typePacket, String message) {
-        socketClientGlobal.sendPacket(new MessagePacket(typePacket, message));
+    public static void envoyerMessage(String typePacket, String nom, String prenom, String categorie, String message) {
+        socketClientGlobal.sendPacket(new MessagePacket(typePacket, nom, prenom, categorie, message));
+    }
+
+    public static void recupererMessage(String typePacket, String nom, String prenom, String categorie) {
+        socketClientGlobal.sendPacket(new MessageRecupPacket(typePacket, nom, prenom, categorie));
     }
 
     public static void deconnexionMain(String typePacket) {
