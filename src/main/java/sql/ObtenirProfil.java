@@ -7,8 +7,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+
 public class ObtenirProfil {
-    public HashMap getAllProfilsCategorie(String categorie) throws Exception {
+    public HashMap getAllProfilsCategorie(String categorie,String id) throws Exception {
         HashMap profilsConcernes = new HashMap<Integer,ArrayList >();
         ArrayList arrayInfo= new ArrayList<>();
 
@@ -27,9 +29,10 @@ public class ObtenirProfil {
             String query = "SELECT nom_personne,prenom_personne,u.description_utilisateur FROM personne p " +
                     "join utilisateur u on p.id_personne=u.id_personne "+
                     "join categorie c on u.id_categorie=c.id_categorie "+
-                    "where c.nom_categorie = ?";
+                    "where c.nom_categorie = ? AND u.id_personne != ?";
             PreparedStatement updateSales = con.prepareStatement(query);
             updateSales.setString(1, categorie);
+            updateSales.setInt(2, Integer.parseInt(id));
             //étape 4: exécuter la requête
             ResultSet res = updateSales.executeQuery();
 

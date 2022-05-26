@@ -92,7 +92,7 @@ public class Main {
             }
         }else if(message.getString("typePacket").equals("obtenirCategorie")) {
             ObtenirProfil op = new ObtenirProfil();
-            HashMap infos = op.getAllProfilsCategorie(message.getString("categorie"));
+            HashMap infos = op.getAllProfilsCategorie(message.getString("categorie"),token.get(socket.getSocket().getInetAddress().toString().substring(1)));
 
             if(infos.isEmpty()) {
                 System.out.println("Aucun profil trouvé");
