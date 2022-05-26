@@ -125,7 +125,7 @@ public class Main extends Application {
             }
             pc.setProfils(jsonArray);
 
-        } else if(message.getString("typePacket").equals("Préstation retour")) {
+        } else if(message.getString("typePacket").equals("prestation retour")) {
 
         }
     }
