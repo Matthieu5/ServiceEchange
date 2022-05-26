@@ -114,19 +114,42 @@ public class Main extends Application {
             System.out.println(message.getString("message"));
 
         } else if(message.getString("typePacket").equals("Profil Categorie retour")) {
-            JSONObject songs= message.getJSONObject("tableauInfos");
-            Iterator x = songs.keys();
+            JSONObject tab= message.getJSONObject("tableauInfos");
+            Iterator x = tab.keys();
             JSONArray jsonArray = new JSONArray();
             ProfilCategorie pc = new ProfilCategorie(new JSONArray());
 
             while (x.hasNext()){
                 String key = (String) x.next();
-                jsonArray.put(songs.get(key));
+                jsonArray.put(tab.get(key));
             }
             pc.setProfils(jsonArray);
 
         } else if(message.getString("typePacket").equals("prestation retour")) {
+            JSONObject tab= message.getJSONObject("tabPrestation");
+            Iterator x = tab.keys();
+            JSONArray jsonArray = new JSONArray();
+            PrestationController.tabPresta presta = new PrestationController.tabPresta(new JSONArray());
 
+            while (x.hasNext()){
+                String key = (String) x.next();
+                jsonArray.put(tab.get(key));
+            }
+            presta.setArray(jsonArray);
+
+            Platform.runLater(() -> {
+                try {
+                    // Load connexion overview.
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(Main.class.getResource("/view/prestationOverview.fxml"));
+                    AnchorPane prestationOverview = (AnchorPane) loader.load();
+
+                    // Set connexion overview into the center of root layout.
+                    rootLayout.setCenter(prestationOverview);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
@@ -216,22 +239,7 @@ public class Main extends Application {
         });
     }
 
-    public static void showPrestationOverview() {
-        afficherPrestation("recupPrestation");
-        Platform.runLater(() -> {
-            try {
-                // Load connexion overview.
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("/view/prestationOverview.fxml"));
-                AnchorPane prestationOverview = (AnchorPane) loader.load();
-
-                // Set connexion overview into the center of root layout.
-                rootLayout.setCenter(prestationOverview);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
+    public static void showPrestationOverview() {afficherPrestation("recupPrestation");}
 
 
 
