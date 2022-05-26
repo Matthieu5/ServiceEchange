@@ -1,5 +1,6 @@
 package server;
 
+import application.ProfilCategorie;
 import org.json.JSONObject;
 import sql.*;
 import xyz.baddeveloper.lwsl.packet.Packet;
@@ -97,7 +98,6 @@ public class Main {
                 System.out.println("Aucun profil trouvé");
             } else {
                 socket.sendPacket(new AfficherProfilCategoriePacketReturn(infos));
-
             }
         }
     }
