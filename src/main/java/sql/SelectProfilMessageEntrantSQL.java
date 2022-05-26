@@ -34,7 +34,7 @@ public class SelectProfilMessageEntrantSQL {
 
 
             //étape 3: créer l'objet statement
-            String query2 = "SELECT libelle_message FROM message where id_personne=? AND id_personne_1=?";
+            String query2 = "SELECT libelle_message, timestamp_message FROM message where id_personne=? AND id_personne_1=?";
             PreparedStatement updateSales2 = con.prepareStatement(query2);
             updateSales2.setInt(1, Integer.parseInt(id_destinataire));
             updateSales2.setInt(2, Integer.parseInt(id));
@@ -42,7 +42,7 @@ public class SelectProfilMessageEntrantSQL {
             //étape 4: exécuter la requête
             ResultSet res2 = updateSales2.executeQuery();
             if(res2.next()) {
-                messagesEntrant.add(res2.getObject(1).toString());
+                messagesEntrant.add(res2.getObject(1).toString() + "=" + res2.getObject(2).toString());
             }
 
             //étape 5: fermez l'objet de connexion
