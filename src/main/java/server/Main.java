@@ -125,7 +125,10 @@ public class Main {
             } else {
                 socket.sendPacket(new MessagePacketReturn(messages));
             }
+        } else if(message.getString("typePacket").equals("recupPrestation")) {
+            socket.sendPacket(new prestationPacketReturn("issou"));
         }
+
     }
 
     public static class AfficherProfilCategoriePacketReturn extends Packet {
@@ -173,6 +176,14 @@ public class Main {
         public DeconnexionPacketReturn(String reponse){
             getObject().put("typePacket", "Deconnexion retour");
 
+        }
+    }
+
+    public static class prestationPacketReturn extends Packet {
+
+        public prestationPacketReturn(String reponse){
+            getObject().put("typePacket", "Préstation retour");
+            getObject().put("message", reponse);
         }
     }
 
