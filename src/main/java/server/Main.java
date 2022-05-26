@@ -126,6 +126,12 @@ public class Main {
             ArrayList messagesEntrant = spmes.getSelectProfilMessageEntrantSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nom"), message.getString("prenom"));
 
             socket.sendPacket(new MessagePacketReturn(messagesSortant, messagesEntrant));
+
+        }else if(message.getString("typePacket").equals("recupPrestation")) {
+            RecupPrestation rp = new RecupPrestation();
+            HashMap prestation = rp.getAllPrestation(token.get(socket.getSocket().getInetAddress().toString().substring(1)));
+            socket.sendPacket(new prestationPacketReturn(prestation));
+
         }
     }
 
@@ -175,6 +181,13 @@ public class Main {
         public DeconnexionPacketReturn(String reponse){
             getObject().put("typePacket", "Deconnexion retour");
 
+        }
+    }
+
+    public static class prestationPacketReturn extends Packet {
+        public prestationPacketReturn(HashMap prestation){
+            getObject().put("typePacket", "prestation retour");
+            getObject().put("message", prestation);
         }
     }
 
