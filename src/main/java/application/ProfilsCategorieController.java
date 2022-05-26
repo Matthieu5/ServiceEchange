@@ -92,7 +92,7 @@ public class ProfilsCategorieController implements Initializable {
                         }
                     }
                 },
-                1000
+                100
         );
     }
 
