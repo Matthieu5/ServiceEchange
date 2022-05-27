@@ -131,8 +131,24 @@ public class PrestationController implements Initializable {
         public String getNote_prestation() {return note_prestation;}
         public String getDescription_prestation() {return description_prestation;}
         public String getNom_categorie() {return nom_categorie;}
-        public String isRealise() {return realise;}
-        public String getAccepte() {return accepte;}
+        public String isRealise() {
+            if (this.realise.equals("t")) {
+                return "Oui";
+            }else if (this.realise.equals("f")) {
+                return "Non";
+            }else {
+                return "";
+            }
+        }
+        public String getAccepte() {
+            if (this.accepte.equals("t")) {
+                return "Oui";
+            }else if (this.realise.equals("f")) {
+                return "Non";
+            }else {
+                return "";
+            }
+        }
         public String getNom_personne() {return nom_personne;}
 
         public void setId_prestation(String id_prestation) {this.id_prestation = id_prestation;}
