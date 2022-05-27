@@ -23,7 +23,7 @@ public class PrestationController implements Initializable {
     @FXML
     private TableView<Prestation> tablePrestations;
     @FXML
-    private TableColumn<Prestation, String> idColumn;
+    private TableColumn<Prestation, String> idPrestation;
     @FXML
     private TableColumn<Prestation, String> dateColumn;
     @FXML
@@ -66,6 +66,7 @@ public class PrestationController implements Initializable {
         try {
             JSONArray js = tabPresta.getArray();
             ObservableList<Prestation> presta = tablePrestations.getItems();
+            idPrestation.setCellValueFactory(new PropertyValueFactory<Prestation, String>("id_prestation"));
             dateColumn.setCellValueFactory(new PropertyValueFactory<Prestation, String>("date_prestation"));
             realiseColumn.setCellValueFactory(new PropertyValueFactory<Prestation, String>("realise"));
             accepteColumn.setCellValueFactory(new PropertyValueFactory<Prestation, String>("accepte"));
@@ -78,9 +79,9 @@ public class PrestationController implements Initializable {
                 Prestation p = new Prestation();
                 for (int j=0; j < js.getJSONArray(i).length(); j++) {
                     if(j==0) {
-                        p.setId_column(js.getJSONArray(i).get(j).toString());
+                        p.setId_prestation(js.getJSONArray(i).get(j).toString());
                     }else if (j==1) {
-                        p.setRealise(js.getJSONArray(i).get(j).toString());
+                        p.setDate_prestation(js.getJSONArray(i).get(j).toString());
                     }else if (j==2) {
                         p.setRealise(js.getJSONArray(i).get(j).toString());
                     }else if (j==3) {
@@ -110,7 +111,7 @@ public class PrestationController implements Initializable {
     public void redirectionProfil () {Main.showParametreOverview();}
 
     public class Prestation {
-        private String id_column;
+        private String id_prestation;
         private String date_prestation;
         private String realise;
         private String accepte;
@@ -119,7 +120,7 @@ public class PrestationController implements Initializable {
         private String nom_categorie;
         private String nom_personne;
 
-        public String getId_column() {return id_column;}
+        public String getId_prestation() {return id_prestation;}
         public String getDate_prestation() {return date_prestation;}
         public String getNote_prestation() {return note_prestation;}
         public String getDescription_prestation() {return description_prestation;}
@@ -128,7 +129,7 @@ public class PrestationController implements Initializable {
         public String getAccepte() {return accepte;}
         public String getNom_personne() {return nom_personne;}
 
-        public void setId_column(String id_column) {this.id_column = id_column;}
+        public void setId_prestation(String id_prestation) {this.id_prestation = id_prestation;}
         public void setDate_prestation(String date_prestation) {this.date_prestation = date_prestation;}
         public void setDescription_prestation(String description_prestation) {this.description_prestation = description_prestation;}
         public void setNom_categorie(String nom_categorie) {this.nom_categorie = nom_categorie;}
