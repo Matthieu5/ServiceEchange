@@ -149,6 +149,9 @@ public class Main {
             }else {
                 System.out.println("Erreur update");
             }
+        } else if (message.getString("typePacket").equals("EnvoiNote")) {
+            EnvoiNote envoiNote = new EnvoiNote();
+            envoiNote.insertNote(message.getString("idPresta"), message.getString("notePresta"));
         }
 
     }

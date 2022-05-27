@@ -388,6 +388,7 @@ public class Main extends Application {
 
     public static void envoiNote(String typePacket, String id, String note) {
         socketClientGlobal.sendPacket(new EnvoiNotePacket(typePacket, id, note));
+        showPrestationOverview();
     }
 
     public static void propositionPrestation(String typePacket, String nbHeure, String descriptionPrestation, String nomDestinataire, String prenomDestinataire) {
