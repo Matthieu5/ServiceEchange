@@ -181,5 +181,6 @@ public class PrestationController implements Initializable {
 
     public void AccepterPrestation(ActionEvent actionEvent) {
         accepterPrestation("accepter prestation",idSelectionnee);
+        Main.showPrestationOverview();
     }
 }
