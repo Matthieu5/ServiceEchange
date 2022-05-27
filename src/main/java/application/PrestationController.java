@@ -134,4 +134,8 @@ public class PrestationController implements Initializable {
             this.array = array;
         }
     }
+
+    public static void ValiderPrestation() {
+        Main.showNotationOverview();
+    }
 }
