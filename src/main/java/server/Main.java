@@ -136,6 +136,9 @@ public class Main {
             FormatUser formatUser = new FormatUser();
             ArrayList usersFormat = formatUser.getUsersFormat(users);
             socket.sendPacket(new userPacketReturn(usersFormat));
+        } else if (message.getString("typePacket").equals("EnvoiNote")) {
+            EnvoiNote envoiNote = new EnvoiNote();
+            envoiNote.insertNote(message.getString("idPresta"), message.getString("notePresta"));
         }
     }
 
