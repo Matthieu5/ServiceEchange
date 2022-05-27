@@ -47,6 +47,7 @@ public class PrestationController implements Initializable {
             noteColumn.setCellValueFactory(new PropertyValueFactory<Prestation, String>("note_prestation"));
             categorieColumn.setCellValueFactory(new PropertyValueFactory<Prestation, String>("nom_categorie"));
             nomColumn.setCellValueFactory(new PropertyValueFactory<Prestation, String>("nom_personne"));
+
             for (int i=0; i < js.length(); i++) {
                 Prestation p = new Prestation();
                 for (int j=0; j < js.getJSONArray(i).length(); j++) {
