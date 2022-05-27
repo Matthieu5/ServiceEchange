@@ -130,6 +130,20 @@ public class Main {
         }else if (message.getString("typePacket").equals("recupPrestation")) {
             RecupPrestation recupPrestation = new RecupPrestation();
             socket.sendPacket(new prestationPacketReturn(recupPrestation.getAllPrestation(token.get(socket.getSocket().getInetAddress().toString().substring(1)))));
+        } else if (message.getString("typePacket").equals("RecupUser")) {
+            RecupUser recupUser = new RecupUser();
+            ArrayList users = recupUser.getUserMessage(token.get(socket.getSocket().getInetAddress().toString().substring(1)));
+            FormatUser formatUser = new FormatUser();
+            ArrayList usersFormat = formatUser.getUsersFormat(users);
+            socket.sendPacket(new userPacketReturn(usersFormat));
+        }
+    }
+
+    public static class userPacketReturn extends Packet {
+
+        public userPacketReturn(ArrayList users){
+            getObject().put("typePacket", "User retour");
+            getObject().put("users", users);
         }
     }
 

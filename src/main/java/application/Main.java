@@ -248,6 +248,10 @@ public class Main extends Application {
         });
     }
 
+    public static void propositionPrestation() {
+
+    }
+
     public static void showInscriptionOverview() {
         Platform.runLater(() -> {
             try {
@@ -271,6 +275,7 @@ public class Main extends Application {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(Main.class.getResource("/view/categorieOverview.fxml"));
                 AnchorPane categorieOverview = (AnchorPane) loader.load();
+
 
                 // Set connexion overview into the center of root layout.
                 rootLayout.setCenter(categorieOverview);
