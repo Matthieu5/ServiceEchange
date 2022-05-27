@@ -2,6 +2,8 @@ package application;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -24,6 +26,7 @@ public class Main extends Application {
     private Stage stage;
     private static BorderPane rootLayout;
     public static SocketClient socketClientGlobal;
+    protected static ObservableList<String> items = FXCollections.observableArrayList();
 
     @Override
     public void start(Stage stage) {
@@ -129,7 +132,44 @@ public class Main extends Application {
         } else if(message.getString("typePacket").equals("prestation retour")) {
 
         } else if(message.getString("typePacket").equals("Message retour")) {
-            messageController.afficherMessage(message.getJSONArray("messagesSortant"), message.getJSONArray("messagesEntrant"));
+            JSONArray messagesSortant = message.getJSONArray("messagesSortant");
+            JSONArray messagesEntrant = message.getJSONArray("messagesEntrant");
+            String[] words = null;
+            String[] words2 = null;
+            ArrayList messages = new ArrayList<>();
+
+            for(int i = 0; i < messagesSortant.length(); i++) {
+                String mes = String.valueOf(messagesSortant.get(i));
+                words = mes.split("=");
+            }
+
+            for(int i = 0; i < messagesEntrant.length(); i++) {
+                String mes = String.valueOf(messagesEntrant.get(i));
+                words2 = mes.split("=");
+            }
+
+            /*for(int i = 1; i < words.length; i+=2) {
+                for(int j = 1; j <= i; j+=2) {
+                    if(Timestamp.valueOf(words2[j]).before(Timestamp.valueOf(words[i]))) {
+                        messages.add(words2[j-1]);
+                        i -= 2;
+                    } else {
+                        messages.add(words[i-1]);
+                    }
+                }
+            }
+
+            for(int i = 0; i < messages.size(); i++) {
+                System.out.println(messages.get(i));
+            }*/
+            for(int i = 0; i < words.length; i += 2) {
+                items.add(words[i]);
+            }
+
+            for(int i = 0; i < words2.length; i += 2) {
+                items.add(words2[i]);
+            }
+            //messageController.afficherMessage(message.getJSONArray("messagesSortant"), message.getJSONArray("messagesEntrant"));
         }
     }
 
