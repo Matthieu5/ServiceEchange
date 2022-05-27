@@ -10,7 +10,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.json.JSONArray;
@@ -115,21 +114,42 @@ public class Main extends Application {
             System.out.println(message.getString("message"));
 
         } else if(message.getString("typePacket").equals("Profil Categorie retour")) {
-            JSONObject songs= message.getJSONObject("tableauInfos");
-            Iterator x = songs.keys();
+            JSONObject tab= message.getJSONObject("tableauInfos");
+            Iterator x = tab.keys();
             JSONArray jsonArray = new JSONArray();
             ProfilCategorie pc = new ProfilCategorie(new JSONArray());
 
             while (x.hasNext()){
                 String key = (String) x.next();
-                jsonArray.put(songs.get(key));
+                jsonArray.put(tab.get(key));
             }
             pc.setProfils(jsonArray);
 
         } else if(message.getString("typePacket").equals("prestation retour")) {
+            JSONObject tab= message.getJSONObject("tabPrestation");
+            Iterator x = tab.keys();
+            JSONArray jsonArray = new JSONArray();
+            PrestationController.tabPresta presta = new PrestationController.tabPresta(new JSONArray());
 
-        } else if(message.getString("typePacket").equals("Message retour")) {
-            messageController.afficherMessage(message.getJSONArray("messagesSortant"), message.getJSONArray("messagesEntrant"));
+            while (x.hasNext()){
+                String key = (String) x.next();
+                jsonArray.put(tab.get(key));
+            }
+            presta.setArray(jsonArray);
+
+            Platform.runLater(() -> {
+                try {
+                    // Load connexion overview.
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(Main.class.getResource("/view/prestationOverview.fxml"));
+                    AnchorPane prestationOverview = (AnchorPane) loader.load();
+
+                    // Set connexion overview into the center of root layout.
+                    rootLayout.setCenter(prestationOverview);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
@@ -144,22 +164,6 @@ public class Main extends Application {
 
                 // Set connexion overview into the center of root layout.
                 rootLayout.setCenter(connexionOverview);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    public static void showPropositionOverview() {
-        Platform.runLater(() -> {
-            try {
-                // Load person overview.
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("/view/propositionOverview.fxml"));
-                AnchorPane propositionOverview = (AnchorPane) loader.load();
-
-                // Set person overview into the center of root layout.
-                rootLayout.setCenter(propositionOverview);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -235,22 +239,7 @@ public class Main extends Application {
         });
     }
 
-    public static void showPrestationOverview() {
-        afficherPrestation("recupPrestation");
-        Platform.runLater(() -> {
-            try {
-                // Load connexion overview.
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("/view/prestationOverview.fxml"));
-                AnchorPane prestationOverview = (AnchorPane) loader.load();
-
-                // Set connexion overview into the center of root layout.
-                rootLayout.setCenter(prestationOverview);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
+    public static void showPrestationOverview() {afficherPrestation("recupPrestation");}
 
 
 
@@ -276,10 +265,6 @@ public class Main extends Application {
 
     public static void recupererMessage(String typePacket, String nom, String prenom) {
         socketClientGlobal.sendPacket(new MessageRecupPacket(typePacket, nom, prenom));
-    }
-
-    public static void propositionPrestation(String typePacket, String nbHeure, String descriptionPrestation, String nomDestinataire, String prenomDestinataire) {
-        socketClientGlobal.sendPacket(new PropositionPrestation(typePacket, nbHeure, descriptionPrestation, nomDestinataire, prenomDestinataire));
     }
 
     public static void deconnexionMain(String typePacket) {
