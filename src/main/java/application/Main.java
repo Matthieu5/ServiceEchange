@@ -28,6 +28,7 @@ public class Main extends Application {
     private static BorderPane rootLayout;
     public static SocketClient socketClientGlobal;
     protected static ObservableList<String> items = FXCollections.observableArrayList();
+    protected static String idPresta;
 
     @Override
     public void start(Stage stage) {
@@ -221,8 +222,8 @@ public class Main extends Application {
 
     }
 
-    public static void envoyerNote() {
-        envoiNote("EnvoiNote");
+    public static void envoyerNote(String id, String note) {
+        envoiNote("EnvoiNote", id, note);
     }
 
     public static void showMessageAvanceeOverview() {
@@ -340,7 +341,8 @@ public class Main extends Application {
         afficherPrestation("recupPrestation");
     }
 
-    public static void showNotationOverview () {
+    public static void showNotationOverview (String id) {
+        idPresta = id;
         Platform.runLater(() -> {
             try {
                 // Load connexion overview.
@@ -384,8 +386,8 @@ public class Main extends Application {
         socketClientGlobal.sendPacket(new UserRecupPacket(typePacket));
     }
 
-    public static void envoiNote(String typePacket) {
-        socketClientGlobal.sendPacket(new EnvoiNotePacket(typePacket));
+    public static void envoiNote(String typePacket, String id, String note) {
+        socketClientGlobal.sendPacket(new EnvoiNotePacket(typePacket, id, note));
     }
 
     public static void propositionPrestation(String typePacket, String nbHeure, String descriptionPrestation, String nomDestinataire, String prenomDestinataire) {

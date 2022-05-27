@@ -159,7 +159,8 @@ public class PrestationController implements Initializable {
     }
 
     public void ValiderPrestation(ActionEvent actionEvent) {
-        Main.showNotationOverview();
+        Prestation presta = tablePrestations.getSelectionModel().getSelectedItem();
+        Main.showNotationOverview(presta.getId_prestation());
     }
 
     public void AccepterPrestation(ActionEvent actionEvent) {
