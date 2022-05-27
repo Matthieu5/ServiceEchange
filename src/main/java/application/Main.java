@@ -221,6 +221,10 @@ public class Main extends Application {
 
     }
 
+    public static void envoyerNote() {
+
+    }
+
     public static void showMessageAvanceeOverview() {
         recupererUser("RecupUser");
     }
@@ -336,6 +340,21 @@ public class Main extends Application {
         afficherPrestation("recupPrestation");
     }
 
+    public static void showNotationOverview () {
+        Platform.runLater(() -> {
+            try {
+                // Load connexion overview.
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(Main.class.getResource("/view/notationOverview.fxml"));
+                AnchorPane messageOverview = (AnchorPane) loader.load();
+
+                // Set connexion overview into the center of root layout.
+                rootLayout.setCenter(messageOverview);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
     public static void connexionMain(String typePacket, String id, String mdp) {
         socketClientGlobal.sendPacket(new LoginPacket(typePacket, id, mdp));

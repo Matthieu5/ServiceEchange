@@ -3,9 +3,7 @@ package application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.json.JSONArray;
 
@@ -37,9 +35,31 @@ public class PrestationController implements Initializable {
     private TableColumn<Prestation, String> categorieColumn;
     @FXML
     private TableColumn<Prestation, String> nomColumn;
+    @FXML
+    private Button buttonAccepter;
+    @FXML
+    private Button buttonValider;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        tablePrestations.setRowFactory( tv -> {
+            TableRow<Prestation> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Prestation presta = tablePrestations.getSelectionModel().getSelectedItem();
+                    if(presta.getNom_personne().equals("Moi")) {
+                        buttonValider.setVisible(true);
+                        buttonAccepter.setVisible(false);
+                    }else {
+                        buttonValider.setVisible(false);
+                        buttonAccepter.setVisible(true);
+                    }
+                }
+            });
+            return row ;
+        });
+
         try {
             JSONArray js = tabPresta.getArray();
             ObservableList<Prestation> presta = tablePrestations.getItems();
@@ -121,5 +141,9 @@ public class PrestationController implements Initializable {
         public void setArray(JSONArray array) {
             this.array = array;
         }
+    }
+
+    public static void ValiderPrestation() {
+        Main.showNotationOverview();
     }
 }

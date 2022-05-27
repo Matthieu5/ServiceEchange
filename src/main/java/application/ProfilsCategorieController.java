@@ -36,13 +36,16 @@ public class ProfilsCategorieController implements Initializable {
     private Label prenom;
     @FXML
     private Label note;
+    @FXML
+    private Label compteurProfil;
 
     protected static String nomFormat;
     protected static String prenomFormat;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        
+        compteurProfil.setText(Profil.getCompteur());
 
         Main.afficherProfilCategorie("obtenirCategorie", getTitreCategorie());
         TitreCategorie.setText(getTitreCategorie());
@@ -91,7 +94,7 @@ public class ProfilsCategorieController implements Initializable {
                         }
                     }
                 },
-                100
+                300
         );
     }
 

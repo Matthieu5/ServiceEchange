@@ -18,7 +18,7 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <Label fx:id="compteurProfil" prefHeight="22.0" prefWidth="43.0" style="-fx-border-color: black;" text="Label" textAlignment="CENTER" translateX="750.0" translateY="38.0">
+            <Label fx:id="compteurProfil" prefHeight="22.0" prefWidth="43.0" style="-fx-border-color: black;" text="Label" textAlignment="CENTER" translateX="600.0" translateY="38.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -27,7 +27,7 @@
       </HBox>
       <HBox prefHeight="500.0" prefWidth="900.0" translateY="100.0">
          <children>
-            <TableView fx:id="ProfilListe"  prefHeight="500.0" prefWidth="344.0">
+            <TableView fx:id="ProfilListe" prefHeight="500.0" prefWidth="344.0">
               <columns>
                  <TableColumn fx:id="nomColumn" prefWidth="75.0" text="Nom" />
                  <TableColumn fx:id="prenomColumn" prefWidth="75.0" text="Prénom" />
@@ -49,16 +49,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="356.0" translateY="115.0">
-               <children>
-                  <TableView fx:id="competenceListe" prefHeight="300.0" prefWidth="356.0">
-                    <columns>
-                      <TableColumn editable="false" prefWidth="355.200018286705" resizable="false" text="Compétences" />
-                    </columns>
-
-                  </TableView>
-               </children>
-            </HBox>
+            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="356.0" translateY="115.0" />
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="100.0" translateY="415.0">
                <children>
                   <Button fx:id="btnMessage" mnemonicParsing="false" onAction="#redirectionMessage" prefHeight="26.0" prefWidth="65.0" text="Message" translateX="15.0" translateY="15.0" />
