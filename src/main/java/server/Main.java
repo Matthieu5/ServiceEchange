@@ -127,6 +127,9 @@ public class Main {
         } else if (message.getString("typePacket").equals("PropositionPrestation")) {
             InsertPropositionPrestationSQL ipps = new InsertPropositionPrestationSQL();
             Boolean retour = ipps.getPropositionPrestationSQL(token.get(socket.getSocket().getInetAddress().toString().substring(1)), message.getString("nbHeure"), message.getString("descriptionPrestation"), message.getString("nomDestinataire"), message.getString("prenomDestinataire"));
+        }else if (message.getString("typePacket").equals("recupPrestation")) {
+            RecupPrestation recupPrestation = new RecupPrestation();
+            socket.sendPacket(new prestationPacketReturn(recupPrestation.getAllPrestation(token.get(socket.getSocket().getInetAddress().toString().substring(1)))));
         }
     }
 
@@ -196,5 +199,14 @@ public class Main {
             getObject().put("actif", actif);
             getObject().put("categorie", categorie);
         }
+    }
+
+    public static class prestationPacketReturn extends Packet {
+        public prestationPacketReturn(HashMap tableauPrestation){
+            getObject().put("typePacket", "prestation retour");
+            getObject().put("tableauPrestation", tableauPrestation);
+        }
+
+
     }
 }
