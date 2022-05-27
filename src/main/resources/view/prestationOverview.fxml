@@ -28,6 +28,7 @@
               <columns>
                   <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
                   <TableColumn fx:id="realiseColumn" prefWidth="75.0" text="Realisé" />
+                  <TableColumn fx:id="accepteColumn" prefWidth="75.0" text="Accepté" />
                   <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Description" />
                   <TableColumn fx:id="noteColumn" prefWidth="75.0" text="Note" />
                   <TableColumn fx:id="categorieColumn" prefWidth="75.0" text="Categorie" />

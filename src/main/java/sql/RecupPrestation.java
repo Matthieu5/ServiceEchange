@@ -21,7 +21,7 @@ public class RecupPrestation {
                     "jdbc:postgresql://localhost:5432/bd_projetService","postgres","admin");
 
             //étape 3: créer l'objet statement
-            String query = "SELECT date_prestation,realise,description_prestation,note_prestation,c.nom_categorie,p.id_personne,pers.nom_personne,p.id_personne_1 " +
+            String query = "SELECT date_prestation,realise,accepte,description_prestation,note_prestation,c.nom_categorie,p.id_personne,pers.nom_personne,p.id_personne_1 " +
                     "FROM prestation p " +
                     "join utilisateur u on p.id_personne=u.id_personne "+
                     "join personne pers on pers.id_personne=u.id_personne "+
@@ -41,10 +41,11 @@ public class RecupPrestation {
                 arrayInfo.add(2,res.getString(3));
                 arrayInfo.add(3,res.getString(4));
                 arrayInfo.add(4,res.getString(5));
-                if (res.getString(6).equals(id)) {
-                    arrayInfo.add(5,"Moi");
+                arrayInfo.add(5,res.getString(6));
+                if (res.getString(7).equals(id)) {
+                    arrayInfo.add(6,"Moi");
                 }else {
-                    arrayInfo.add(5,res.getString(7));
+                    arrayInfo.add(6,res.getString(8));
                 }
 
                 prestationsRetournees.put(compteur,arrayInfo.clone());

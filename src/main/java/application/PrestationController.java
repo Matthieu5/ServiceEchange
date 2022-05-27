@@ -28,6 +28,8 @@ public class PrestationController implements Initializable {
     @FXML
     private TableColumn<Prestation, String> realiseColumn;
     @FXML
+    private TableColumn<Prestation, String> accepteColumn;
+    @FXML
     private TableColumn<Prestation, String> descriptionColumn;
     @FXML
     private TableColumn<Prestation, String> noteColumn;
@@ -43,6 +45,7 @@ public class PrestationController implements Initializable {
             ObservableList<Prestation> presta = tablePrestations.getItems();
             dateColumn.setCellValueFactory(new PropertyValueFactory<Prestation, String>("date_prestation"));
             realiseColumn.setCellValueFactory(new PropertyValueFactory<Prestation, String>("realise"));
+            accepteColumn.setCellValueFactory(new PropertyValueFactory<Prestation, String>("accepte"));
             descriptionColumn.setCellValueFactory(new PropertyValueFactory<Prestation, String>("description_prestation"));
             noteColumn.setCellValueFactory(new PropertyValueFactory<Prestation, String>("note_prestation"));
             categorieColumn.setCellValueFactory(new PropertyValueFactory<Prestation, String>("nom_categorie"));
@@ -56,12 +59,14 @@ public class PrestationController implements Initializable {
                     }else if (j==1) {
                         p.setRealise(js.getJSONArray(i).get(j).toString());
                     }else if (j==2) {
-                        p.setDescription_prestation(js.getJSONArray(i).get(j).toString());
+                        p.setAccepte(js.getJSONArray(i).get(j).toString());
                     }else if (j==3) {
+                        p.setDescription_prestation(js.getJSONArray(i).get(j).toString());
+                    } else if (j==4) {
                         p.setNote_prestation(js.getJSONArray(i).get(j).toString());
-                    }else if (j==4) {
-                        p.setNom_categorie(js.getJSONArray(i).get(j).toString());
                     }else if (j==5) {
+                        p.setNom_categorie(js.getJSONArray(i).get(j).toString());
+                    }else if (j==6) {
                         p.setNom_personne(js.getJSONArray(i).get(j).toString());
                     }
                 }
@@ -82,6 +87,7 @@ public class PrestationController implements Initializable {
     public class Prestation {
         private String date_prestation;
         private String realise;
+        private String accepte;
         private String description_prestation;
         private String note_prestation;
         private String nom_categorie;
@@ -92,6 +98,7 @@ public class PrestationController implements Initializable {
         public String getDescription_prestation() {return description_prestation;}
         public String getNom_categorie() {return nom_categorie;}
         public String isRealise() {return realise;}
+        public String getAccepte() {return accepte;}
         public String getNom_personne() {return nom_personne;}
 
         public void setDate_prestation(String date_prestation) {this.date_prestation = date_prestation;}
@@ -100,6 +107,7 @@ public class PrestationController implements Initializable {
         public void setNote_prestation(String note_prestation) {this.note_prestation = note_prestation;}
         public void setRealise(String realise) {this.realise = realise;}
         public void setNom_personne(String nom_personne) {this.nom_personne = nom_personne;}
+        public void setAccepte(String accepte) {this.accepte = accepte;}
     }
 
     public static class tabPresta {
