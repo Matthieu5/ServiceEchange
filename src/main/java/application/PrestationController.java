@@ -22,6 +22,8 @@ public class PrestationController implements Initializable {
     @FXML
     private TableView<Prestation> tablePrestations;
     @FXML
+    private TableColumn<Prestation, String> idColumn;
+    @FXML
     private TableColumn<Prestation, String> dateColumn;
     @FXML
     private TableColumn<Prestation, String> realiseColumn;
@@ -75,18 +77,20 @@ public class PrestationController implements Initializable {
                 Prestation p = new Prestation();
                 for (int j=0; j < js.getJSONArray(i).length(); j++) {
                     if(j==0) {
-                        p.setDate_prestation(js.getJSONArray(i).get(j).toString());
+                        p.setId_column(js.getJSONArray(i).get(j).toString());
                     }else if (j==1) {
                         p.setRealise(js.getJSONArray(i).get(j).toString());
                     }else if (j==2) {
-                        p.setAccepte(js.getJSONArray(i).get(j).toString());
+                        p.setRealise(js.getJSONArray(i).get(j).toString());
                     }else if (j==3) {
+                        p.setAccepte(js.getJSONArray(i).get(j).toString());
+                    }else if (j==4) {
                         p.setDescription_prestation(js.getJSONArray(i).get(j).toString());
-                    } else if (j==4) {
+                    } else if (j==5) {
                         p.setNote_prestation(js.getJSONArray(i).get(j).toString());
-                    }else if (j==5) {
-                        p.setNom_categorie(js.getJSONArray(i).get(j).toString());
                     }else if (j==6) {
+                        p.setNom_categorie(js.getJSONArray(i).get(j).toString());
+                    }else if (j==7) {
                         p.setNom_personne(js.getJSONArray(i).get(j).toString());
                     }
                 }
@@ -105,6 +109,7 @@ public class PrestationController implements Initializable {
     public void redirectionProfil () {Main.showParametreOverview();}
 
     public class Prestation {
+        private String id_column;
         private String date_prestation;
         private String realise;
         private String accepte;
@@ -113,6 +118,7 @@ public class PrestationController implements Initializable {
         private String nom_categorie;
         private String nom_personne;
 
+        public String getId_column() {return id_column;}
         public String getDate_prestation() {return date_prestation;}
         public String getNote_prestation() {return note_prestation;}
         public String getDescription_prestation() {return description_prestation;}
@@ -121,6 +127,7 @@ public class PrestationController implements Initializable {
         public String getAccepte() {return accepte;}
         public String getNom_personne() {return nom_personne;}
 
+        public void setId_column(String id_column) {this.id_column = id_column;}
         public void setDate_prestation(String date_prestation) {this.date_prestation = date_prestation;}
         public void setDescription_prestation(String description_prestation) {this.description_prestation = description_prestation;}
         public void setNom_categorie(String nom_categorie) {this.nom_categorie = nom_categorie;}
