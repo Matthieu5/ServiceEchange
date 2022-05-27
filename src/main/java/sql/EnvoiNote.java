@@ -19,7 +19,7 @@ public class EnvoiNote {
 
             //étape 3: créer l'objet statement
             String query =
-                    "UPDATE prestation SET note_prestation=?, realise=? WHERE id=?";
+                    "UPDATE prestation SET note_prestation=?, realise=? WHERE numero_prestation=?";
 
             PreparedStatement updateSales = con.prepareStatement(query);
             updateSales.setDouble(1, Double.parseDouble(note));
