@@ -222,8 +222,8 @@ public class Main extends Application {
 
     }
 
-    public static void envoyerNote(String id) {
-        envoiNote("EnvoiNote", id);
+    public static void envoyerNote(String id, String note) {
+        envoiNote("EnvoiNote", id, note);
     }
 
     public static void showMessageAvanceeOverview() {
@@ -386,8 +386,8 @@ public class Main extends Application {
         socketClientGlobal.sendPacket(new UserRecupPacket(typePacket));
     }
 
-    public static void envoiNote(String typePacket, String id) {
-        socketClientGlobal.sendPacket(new EnvoiNotePacket(typePacket, id));
+    public static void envoiNote(String typePacket, String id, String note) {
+        socketClientGlobal.sendPacket(new EnvoiNotePacket(typePacket, id, note));
     }
 
     public static void propositionPrestation(String typePacket, String nbHeure, String descriptionPrestation, String nomDestinataire, String prenomDestinataire) {
