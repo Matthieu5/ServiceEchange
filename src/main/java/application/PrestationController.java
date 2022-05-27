@@ -1,6 +1,7 @@
 package application;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -40,7 +41,7 @@ public class PrestationController implements Initializable {
     @FXML
     private Button buttonAccepter;
     @FXML
-    private Button buttonValider;
+    private Button btnValider;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,10 +52,10 @@ public class PrestationController implements Initializable {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     Prestation presta = tablePrestations.getSelectionModel().getSelectedItem();
                     if(presta.getNom_personne().equals("Moi")) {
-                        buttonValider.setVisible(true);
+                        btnValider.setVisible(true);
                         buttonAccepter.setVisible(false);
                     }else {
-                        buttonValider.setVisible(false);
+                        btnValider.setVisible(false);
                         buttonAccepter.setVisible(true);
                     }
                 }
@@ -150,7 +151,7 @@ public class PrestationController implements Initializable {
         }
     }
 
-    public static void ValiderPrestation() {
+    public void ValiderPrestation(ActionEvent actionEvent) {
         Main.showNotationOverview();
     }
 }
