@@ -21,7 +21,7 @@ public class RecupPrestation {
                     "jdbc:postgresql://localhost:5432/bd_projetService","postgres","admin");
 
             //étape 3: créer l'objet statement
-            String query = "SELECT date_prestation,realise,description_prestation,note_prestation,c.nom_categorie,pers.nom_personne FROM prestation p " +
+            String query = "SELECT date_prestation,realise,accepte,description_prestation,note_prestation,c.nom_categorie,pers.nom_personne FROM prestation p " +
                     "join utilisateur u on p.id_personne=u.id_personne "+
                     "join personne pers on pers.id_personne=u.id_personne "+
                     "join categorie c on u.id_categorie=c.id_categorie "+
