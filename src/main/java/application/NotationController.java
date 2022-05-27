@@ -11,6 +11,6 @@ public class NotationController {
     private TextField notePrestation;
 
     public void ValiderNote(ActionEvent actionEvent) {
-        envoyerNote();
+        envoyerNote(Main.idPresta);
     }
 }
