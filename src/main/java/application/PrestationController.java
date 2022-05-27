@@ -12,6 +12,9 @@ import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import static application.Main.accepterPrestation;
+
+
 public class PrestationController implements Initializable {
 
     @FXML
@@ -43,6 +46,8 @@ public class PrestationController implements Initializable {
     @FXML
     private Button btnValider;
 
+    private int idSelectionnee;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -57,6 +62,7 @@ public class PrestationController implements Initializable {
                     }else {
                         btnValider.setVisible(false);
                         buttonAccepter.setVisible(true);
+                        idSelectionnee= Integer.parseInt(presta.getId_prestation());
                     }
                 }
             });
@@ -154,5 +160,9 @@ public class PrestationController implements Initializable {
 
     public void ValiderPrestation(ActionEvent actionEvent) {
         Main.showNotationOverview();
+    }
+
+    public void AccepterPrestation(ActionEvent actionEvent) {
+        accepterPrestation("accepter prestation",idSelectionnee);
     }
 }
