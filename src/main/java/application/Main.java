@@ -33,7 +33,7 @@ public class Main extends Application {
         this.stage = stage;
         this.stage.setTitle("Service Exchanges");
 
-        SocketClient socketclient = new SocketClient("192.168.1.23", 25566)
+        SocketClient socketclient = new SocketClient("192.168.43.202", 25566)
                 .addConnectEvent(onConnect -> System.out.println("Connected!"))
                 .addDisconnectEvent(onDisconnect -> System.out.println("Disconnected!"))
                 .addPacketReceivedEvent(((socket, packet) -> {
@@ -171,6 +171,22 @@ public class Main extends Application {
             }
             //messageController.afficherMessage(message.getJSONArray("messagesSortant"), message.getJSONArray("messagesEntrant"));
         }
+    }
+
+    public static void showMessageAvanceeOverview() {
+        Platform.runLater(() -> {
+            try {
+                // Load connexion overview.
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(Main.class.getResource("/view/messageAvanceeOverview.fxml"));
+                AnchorPane messageOverview = (AnchorPane) loader.load();
+
+                // Set connexion overview into the center of root layout.
+                rootLayout.setCenter(messageOverview);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 

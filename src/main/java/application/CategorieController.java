@@ -8,6 +8,11 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static application.Profil.nom;
+import static application.Profil.prenom;
+import static application.ProfilsCategorieController.nomFormat;
+import static application.ProfilsCategorieController.prenomFormat;
+
 
 public class CategorieController  {
 
@@ -49,6 +54,11 @@ public class CategorieController  {
     protected void redirectionProfils(ActionEvent actionEvent) {
         setProfilName(((Button)actionEvent.getSource()).getText());
         Main.showProfilsOverview();
+    }
+
+    @FXML
+    protected void redirectionMessageAvancee() {
+        Main.showMessageAvanceeOverview();
     }
 
     @FXML
