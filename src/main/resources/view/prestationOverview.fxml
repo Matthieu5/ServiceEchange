@@ -40,7 +40,7 @@
       </HBox>
       <HBox layoutX="1.0" layoutY="401.0" prefHeight="198.0" prefWidth="900.0">
          <children>
-            <Button fx:id="buttonAccepter" mnemonicParsing="false" text="Accepter" translateX="350.0" translateY="100.0" visible="false" />
+            <Button fx:id="buttonAccepter" mnemonicParsing="false" onAction="#AccepterPrestation" text="Accepter" translateX="350.0" translateY="100.0" visible="false" />
             <Button fx:id="btnValider" mnemonicParsing="false" onAction="#ValiderPrestation" text="Valider" translateX="400.0" translateY="100.0" visible="false" />
          </children></HBox>
    </children>

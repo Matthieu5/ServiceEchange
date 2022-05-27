@@ -28,13 +28,14 @@ public class Main extends Application {
     private static BorderPane rootLayout;
     public static SocketClient socketClientGlobal;
     protected static ObservableList<String> items = FXCollections.observableArrayList();
+    protected static String idPresta;
 
     @Override
     public void start(Stage stage) {
         this.stage = stage;
         this.stage.setTitle("Service Exchanges");
 
-        SocketClient socketclient = new SocketClient("192.168.43.202", 25566)
+        SocketClient socketclient = new SocketClient("192.168.50.135", 25566)
                 .addConnectEvent(onConnect -> System.out.println("Connected!"))
                 .addDisconnectEvent(onDisconnect -> System.out.println("Disconnected!"))
                 .addPacketReceivedEvent(((socket, packet) -> {
@@ -221,8 +222,8 @@ public class Main extends Application {
 
     }
 
-    public static void envoyerNote() {
-        envoiNote("EnvoiNote");
+    public static void envoyerNote(String id, String note) {
+        envoiNote("EnvoiNote", id, note);
     }
 
     public static void showMessageAvanceeOverview() {
@@ -340,7 +341,8 @@ public class Main extends Application {
         afficherPrestation("recupPrestation");
     }
 
-    public static void showNotationOverview () {
+    public static void showNotationOverview (String id) {
+        idPresta = id;
         Platform.runLater(() -> {
             try {
                 // Load connexion overview.
@@ -384,8 +386,8 @@ public class Main extends Application {
         socketClientGlobal.sendPacket(new UserRecupPacket(typePacket));
     }
 
-    public static void envoiNote(String typePacket) {
-        socketClientGlobal.sendPacket(new EnvoiNotePacket(typePacket));
+    public static void envoiNote(String typePacket, String id, String note) {
+        socketClientGlobal.sendPacket(new EnvoiNotePacket(typePacket, id, note));
     }
 
     public static void propositionPrestation(String typePacket, String nbHeure, String descriptionPrestation, String nomDestinataire, String prenomDestinataire) {
@@ -402,6 +404,10 @@ public class Main extends Application {
 
     public static void afficherPrestation(String typePacket) {
         socketClientGlobal.sendPacket(new PrestationPacket(typePacket));
+    }
+
+    public static void accepterPrestation(String typePacket, int id) {
+        socketClientGlobal.sendPacket(new AccepterPrestationPacket(typePacket,id));
     }
 
 
