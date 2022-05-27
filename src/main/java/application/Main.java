@@ -20,6 +20,7 @@ import packet.*;
 import xyz.baddeveloper.lwsl.client.SocketClient;
 import xyz.baddeveloper.lwsl.client.exceptions.ConnectException;
 import org.json.JSONObject;
+import xyz.baddeveloper.lwsl.packet.Packet;
 
 public class Main extends Application {
 
@@ -33,7 +34,7 @@ public class Main extends Application {
         this.stage = stage;
         this.stage.setTitle("Service Exchanges");
 
-        SocketClient socketclient = new SocketClient("192.168.1.23", 25566)
+        SocketClient socketclient = new SocketClient("192.168.43.202", 25566)
                 .addConnectEvent(onConnect -> System.out.println("Connected!"))
                 .addDisconnectEvent(onDisconnect -> System.out.println("Disconnected!"))
                 .addPacketReceivedEvent(((socket, packet) -> {
@@ -117,20 +118,6 @@ public class Main extends Application {
         } else if(message.getString("typePacket").equals("Update Profil retour")) {
             System.out.println(message.getString("message"));
 
-        } else if(message.getString("typePacket").equals("Profil Categorie retour")) {
-            JSONObject songs= message.getJSONObject("tableauInfos");
-            Iterator x = songs.keys();
-            JSONArray jsonArray = new JSONArray();
-            ProfilCategorie pc = new ProfilCategorie(new JSONArray());
-
-            while (x.hasNext()){
-                String key = (String) x.next();
-                jsonArray.put(songs.get(key));
-            }
-            pc.setProfils(jsonArray);
-
-        } else if(message.getString("typePacket").equals("prestation retour")) {
-
         } else if(message.getString("typePacket").equals("Message retour")) {
             JSONArray messagesSortant = message.getJSONArray("messagesSortant");
             JSONArray messagesEntrant = message.getJSONArray("messagesEntrant");
@@ -170,7 +157,72 @@ public class Main extends Application {
                 items.add(words2[i]);
             }
             //messageController.afficherMessage(message.getJSONArray("messagesSortant"), message.getJSONArray("messagesEntrant"));
+        } else if(message.getString("typePacket").equals("Profil Categorie retour")) {
+            JSONObject songs= message.getJSONObject("tableauInfos");
+            Iterator x = songs.keys();
+            JSONArray jsonArray = new JSONArray();
+            ProfilCategorie pc = new ProfilCategorie(new JSONArray());
+
+            while (x.hasNext()){
+                String key = (String) x.next();
+                jsonArray.put(songs.get(key));
+            }
+            pc.setProfils(jsonArray);
+        }else if(message.getString("typePacket").equals("prestation retour")) {
+            JSONObject songs= message.getJSONObject("tableauPrestation");
+            Iterator x = songs.keys();
+            JSONArray jsonArray = new JSONArray();
+            PrestationController.tabPresta presta = new PrestationController.tabPresta(new JSONArray());
+
+            while (x.hasNext()){
+                String key = (String) x.next();
+                jsonArray.put(songs.get(key));
+            }
+            presta.setArray(jsonArray);
+
+            Platform.runLater(() -> {
+                try {
+                    // Load connexion overview.
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(Main.class.getResource("/view/prestationOverview.fxml"));
+                    AnchorPane prestationOverview = (AnchorPane) loader.load();
+
+                    // Set connexion overview into the center of root layout.
+                    rootLayout.setCenter(prestationOverview);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } else if(message.getString("typePacket").equals("User retour")) {
+            for(int i = 0; i < message.getJSONArray("users").length(); i++) {
+                String nomPrenom = String.valueOf(message.getJSONArray("users"));
+
+                User u = new User(nomPrenom);
+                User.mettreDansTableau();
+
+                Platform.runLater(() -> {
+                    try {
+                        // Load connexion overview.
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(Main.class.getResource("/view/messageAvanceeOverview.fxml"));
+                        AnchorPane messageOverview = (AnchorPane) loader.load();
+
+                        // Set connexion overview into the center of root layout.
+                        rootLayout.setCenter(messageOverview);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                //messageAvanceeController.entreeUsers(message.getString("users"));
+            }
+
         }
+
+
+    }
+
+    public static void showMessageAvanceeOverview() {
+        recupererUser("RecupUser");
     }
 
 
@@ -206,6 +258,10 @@ public class Main extends Application {
         });
     }
 
+    public static void propositionPrestation() {
+
+    }
+
     public static void showInscriptionOverview() {
         Platform.runLater(() -> {
             try {
@@ -229,6 +285,7 @@ public class Main extends Application {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(Main.class.getResource("/view/categorieOverview.fxml"));
                 AnchorPane categorieOverview = (AnchorPane) loader.load();
+
 
                 // Set connexion overview into the center of root layout.
                 rootLayout.setCenter(categorieOverview);
@@ -277,21 +334,7 @@ public class Main extends Application {
 
     public static void showPrestationOverview() {
         afficherPrestation("recupPrestation");
-        Platform.runLater(() -> {
-            try {
-                // Load connexion overview.
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("/view/prestationOverview.fxml"));
-                AnchorPane prestationOverview = (AnchorPane) loader.load();
-
-                // Set connexion overview into the center of root layout.
-                rootLayout.setCenter(prestationOverview);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
-
 
 
     public static void connexionMain(String typePacket, String id, String mdp) {
@@ -316,6 +359,10 @@ public class Main extends Application {
 
     public static void recupererMessage(String typePacket, String nom, String prenom) {
         socketClientGlobal.sendPacket(new MessageRecupPacket(typePacket, nom, prenom));
+    }
+
+    public static void recupererUser(String typePacket) {
+        socketClientGlobal.sendPacket(new UserRecupPacket(typePacket));
     }
 
     public static void propositionPrestation(String typePacket, String nbHeure, String descriptionPrestation, String nomDestinataire, String prenomDestinataire) {
