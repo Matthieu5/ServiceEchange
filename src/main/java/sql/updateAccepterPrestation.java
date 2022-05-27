@@ -17,7 +17,7 @@ public class updateAccepterPrestation {
                     "jdbc:postgresql://localhost:5432/bd_projetService","postgres","admin");
 
             //étape 3: créer l'objet statement
-            String query = "UPDATE prestation set accepte=? where numero_prestation=?";
+            String query = "UPDATE prestation set accepte=true where numero_prestation=?";
             PreparedStatement updateSales = con.prepareStatement(query);
             updateSales.setInt(1, id);
             updateSales.executeUpdate();
