@@ -136,7 +136,24 @@ public class Main {
             FormatUser formatUser = new FormatUser();
             ArrayList usersFormat = formatUser.getUsersFormat(users);
             socket.sendPacket(new userPacketReturn(usersFormat));
+        }else if (message.getString("typePacket").equals("RecupUser")) {
+            RecupUser recupUser = new RecupUser();
+            ArrayList users = recupUser.getUserMessage(token.get(socket.getSocket().getInetAddress().toString().substring(1)));
+            FormatUser formatUser = new FormatUser();
+            ArrayList usersFormat = formatUser.getUsersFormat(users);
+            socket.sendPacket(new userPacketReturn(usersFormat));
+        }else if (message.getString("typePacket").equals("accepter prestation")) {
+            updateAccepterPrestation up = new updateAccepterPrestation();
+            if (up.updateAccepterPrestation(message.getInt("id"))) {
+                System.out.println("Update réalisé");
+            }else {
+                System.out.println("Erreur update");
+            }
+        } else if (message.getString("typePacket").equals("EnvoiNote")) {
+            EnvoiNote envoiNote = new EnvoiNote();
+            envoiNote.insertNote(message.getString("idPresta"), message.getString("notePresta"));
         }
+
     }
 
     public static class userPacketReturn extends Packet {
