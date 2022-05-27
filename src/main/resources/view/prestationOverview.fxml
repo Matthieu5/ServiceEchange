@@ -26,7 +26,7 @@
          <children>
             <TableView fx:id="tablePrestations" prefHeight="266.0" prefWidth="600.0" translateX="150.0">
               <columns>
-                  <TableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
+                  <TableColumn fx:id="idPrestation" prefWidth="75.0" text="Id" />
                   <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
                   <TableColumn fx:id="realiseColumn" prefWidth="75.0" text="Realisé" />
                   <TableColumn fx:id="accepteColumn" prefWidth="75.0" text="Accepté" />
