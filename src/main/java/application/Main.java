@@ -222,7 +222,7 @@ public class Main extends Application {
     }
 
     public static void envoyerNote() {
-
+        envoiNote("EnvoiNote");
     }
 
     public static void showMessageAvanceeOverview() {
@@ -382,6 +382,10 @@ public class Main extends Application {
 
     public static void recupererUser(String typePacket) {
         socketClientGlobal.sendPacket(new UserRecupPacket(typePacket));
+    }
+
+    public static void envoiNote(String typePacket) {
+        socketClientGlobal.sendPacket(new EnvoiNotePacket(typePacket));
     }
 
     public static void propositionPrestation(String typePacket, String nbHeure, String descriptionPrestation, String nomDestinataire, String prenomDestinataire) {
