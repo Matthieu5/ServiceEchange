@@ -20,6 +20,7 @@ import packet.*;
 import xyz.baddeveloper.lwsl.client.SocketClient;
 import xyz.baddeveloper.lwsl.client.exceptions.ConnectException;
 import org.json.JSONObject;
+import xyz.baddeveloper.lwsl.packet.Packet;
 
 public class Main extends Application {
 
@@ -192,9 +193,36 @@ public class Main extends Application {
                     e.printStackTrace();
                 }
             });
+        } else if(message.getString("typePacket").equals("User retour")) {
+            for(int i = 0; i < message.getJSONArray("users").length(); i++) {
+                String nomPrenom = String.valueOf(message.getJSONArray("users"));
+
+                User u = new User(nomPrenom);
+                User.mettreDansTableau();
+
+                Platform.runLater(() -> {
+                    try {
+                        // Load connexion overview.
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(Main.class.getResource("/view/messageAvanceeOverview.fxml"));
+                        AnchorPane messageOverview = (AnchorPane) loader.load();
+
+                        // Set connexion overview into the center of root layout.
+                        rootLayout.setCenter(messageOverview);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                //messageAvanceeController.entreeUsers(message.getString("users"));
+            }
+
         }
 
 
+    }
+
+    public static void showMessageAvanceeOverview() {
+        recupererUser("RecupUser");
     }
 
 
@@ -230,6 +258,10 @@ public class Main extends Application {
         });
     }
 
+    public static void propositionPrestation() {
+
+    }
+
     public static void showInscriptionOverview() {
         Platform.runLater(() -> {
             try {
@@ -253,6 +285,7 @@ public class Main extends Application {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(Main.class.getResource("/view/categorieOverview.fxml"));
                 AnchorPane categorieOverview = (AnchorPane) loader.load();
+
 
                 // Set connexion overview into the center of root layout.
                 rootLayout.setCenter(categorieOverview);
@@ -326,6 +359,10 @@ public class Main extends Application {
 
     public static void recupererMessage(String typePacket, String nom, String prenom) {
         socketClientGlobal.sendPacket(new MessageRecupPacket(typePacket, nom, prenom));
+    }
+
+    public static void recupererUser(String typePacket) {
+        socketClientGlobal.sendPacket(new UserRecupPacket(typePacket));
     }
 
     public static void propositionPrestation(String typePacket, String nbHeure, String descriptionPrestation, String nomDestinataire, String prenomDestinataire) {

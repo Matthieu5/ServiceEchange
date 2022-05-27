@@ -27,5 +27,6 @@ public class propositionController implements Initializable {
 
     public void proposerPrestation() {
         Main.propositionPrestation("PropositionPrestation", nbHeure.getText(), descriptionPrestation.getText(), nomFormat, prenomFormat);
+        redirectionMessage();
     }
 }

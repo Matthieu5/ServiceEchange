@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class CategorieController  {
+public class CategorieController {
 
     @FXML
     private Button jardinage;
@@ -49,6 +49,11 @@ public class CategorieController  {
     protected void redirectionProfils(ActionEvent actionEvent) {
         setProfilName(((Button)actionEvent.getSource()).getText());
         Main.showProfilsOverview();
+    }
+
+    @FXML
+    protected void redirectionMessageAvancee() {
+        Main.showMessageAvanceeOverview();
     }
 
     @FXML
