@@ -20,6 +20,7 @@ import packet.*;
 import xyz.baddeveloper.lwsl.client.SocketClient;
 import xyz.baddeveloper.lwsl.client.exceptions.ConnectException;
 import org.json.JSONObject;
+import xyz.baddeveloper.lwsl.packet.Packet;
 
 public class Main extends Application {
 
@@ -198,6 +199,7 @@ public class Main extends Application {
     }
 
     public static void showMessageAvanceeOverview() {
+        recupererUser("RecupUser");
         Platform.runLater(() -> {
             try {
                 // Load connexion overview.
@@ -342,6 +344,10 @@ public class Main extends Application {
 
     public static void recupererMessage(String typePacket, String nom, String prenom) {
         socketClientGlobal.sendPacket(new MessageRecupPacket(typePacket, nom, prenom));
+    }
+
+    public static void recupererUser(String typePacket) {
+        socketClientGlobal.sendPacket(new UserRecupPacket(typePacket));
     }
 
     public static void propositionPrestation(String typePacket, String nbHeure, String descriptionPrestation, String nomDestinataire, String prenomDestinataire) {
