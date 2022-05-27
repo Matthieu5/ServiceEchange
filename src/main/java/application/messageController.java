@@ -41,4 +41,7 @@ public class messageController {
     public void redirectionProposition(ActionEvent actionEvent) {
         Main.showPropositionOverview();
     }
+
+    public static void afficherMessage(String messagesSortant, String messagesEntrant) {
+    }
 }
