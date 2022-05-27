@@ -193,6 +193,29 @@ public class Main extends Application {
                     e.printStackTrace();
                 }
             });
+        } else if(message.getString("typePacket").equals("User retour")) {
+            for(int i = 0; i < message.getJSONArray("users").length(); i++) {
+                String nomPrenom = String.valueOf(message.getJSONArray("users"));
+
+                User u = new User(nomPrenom);
+                User.mettreDansTableau();
+
+                Platform.runLater(() -> {
+                    try {
+                        // Load connexion overview.
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(Main.class.getResource("/view/messageAvanceeOverview.fxml"));
+                        AnchorPane messageOverview = (AnchorPane) loader.load();
+
+                        // Set connexion overview into the center of root layout.
+                        rootLayout.setCenter(messageOverview);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                //messageAvanceeController.entreeUsers(message.getString("users"));
+            }
+
         }
 
 
@@ -200,19 +223,6 @@ public class Main extends Application {
 
     public static void showMessageAvanceeOverview() {
         recupererUser("RecupUser");
-        Platform.runLater(() -> {
-            try {
-                // Load connexion overview.
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(Main.class.getResource("/view/messageAvanceeOverview.fxml"));
-                AnchorPane messageOverview = (AnchorPane) loader.load();
-
-                // Set connexion overview into the center of root layout.
-                rootLayout.setCenter(messageOverview);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
 
 
