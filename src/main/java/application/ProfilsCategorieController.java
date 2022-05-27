@@ -10,7 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import packet.AfficherProfilCategoriePacket;
 import packet.LoginPacket;
-import com.google.gson.Gson;
 import java.net.NetworkInterface;
 import java.net.URL;
 import java.util.ArrayList;

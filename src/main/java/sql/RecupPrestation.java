@@ -21,8 +21,9 @@ public class RecupPrestation {
                     "jdbc:postgresql://localhost:5432/bd_projetService","postgres","admin");
 
             //étape 3: créer l'objet statement
-            String query = "SELECT date_proposition,realise,description_proposition,note_proposition,c.nom_categorie FROM proposition p " +
+            String query = "SELECT date_prestation,realise,description_prestation,note_prestation,c.nom_categorie,pers.nom_personne FROM prestation p " +
                     "join utilisateur u on p.id_personne=u.id_personne "+
+                    "join personne pers on pers.id_personne=u.id_personne "+
                     "join categorie c on u.id_categorie=c.id_categorie "+
                     "where p.id_personne = ? OR p.id_personne_1 = ?";
             PreparedStatement updateSales = con.prepareStatement(query);
@@ -40,6 +41,7 @@ public class RecupPrestation {
                 arrayInfo.add(2,res.getString(3));
                 arrayInfo.add(3,res.getString(4));
                 arrayInfo.add(4,res.getString(5));
+                arrayInfo.add(5,res.getString(6));
 
                 prestationsRetournees.put(compteur,arrayInfo.clone());
 

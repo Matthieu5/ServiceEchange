@@ -28,9 +28,9 @@ public class InsertPropositionPrestationSQL {
             }
 
             //étape 3: créer l'objet statement
-            String query2 = "INSERT INTO prestation(heure_prestation, date_prestation, description_prestation, id_personne, id_personne_1) VALUES (?,?,?,?);";
+            String query2 = "INSERT INTO prestation(heure_prestation, date_prestation, description_prestation, id_personne, id_personne_1) VALUES (?,?,?,?,?);";
             PreparedStatement updateSales2 = con.prepareStatement(query2);
-            updateSales2.setString(1, nbHeure);
+            updateSales2.setInt(1, Integer.parseInt(nbHeure));
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             updateSales2.setTimestamp(2, timestamp);
             updateSales2.setString(3, descriptionPrestation);

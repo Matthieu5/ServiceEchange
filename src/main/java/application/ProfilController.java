@@ -65,4 +65,5 @@ public class ProfilController implements Initializable {
         categorieProfil.setText(getCategorie());
         description.setText(getDescription());
     }
+
 }
